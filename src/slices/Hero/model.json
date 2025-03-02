@@ -13,32 +13,36 @@
       "imageUrl": "",
       "primary": {
         "heading": {
-          "type": "StructuredText",
+          "type": "Text",
           "config": {
             "label": "Heading",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "single": "heading1,strong"
+            "placeholder": ""
           }
         },
         "body": {
-          "type": "StructuredText",
+          "type": "Text",
           "config": {
             "label": "Body",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "single": "paragraph,em,strong"
+            "placeholder": ""
           }
         },
-        "button": {
+        "link": {
           "type": "Link",
           "config": {
-            "label": "Button",
+            "label": "Link",
             "placeholder": "",
             "select": null,
             "allowTargetBlank": true,
             "allowText": true,
             "repeat": false
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
           }
         }
       },

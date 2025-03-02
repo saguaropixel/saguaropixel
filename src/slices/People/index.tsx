@@ -3,22 +3,22 @@ import { SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
 
 /**
- * Props for `Hero`.
+ * Props for `People`.
  */
-export type HeroProps = SliceComponentProps<Content.HeroSlice>;
+export type PeopleProps = SliceComponentProps<Content.PeopleSlice>;
 
 /**
- * Component for "Hero" Slices.
+ * Component for "People" Slices.
  */
-const Hero = ({ slice }: HeroProps): JSX.Element => {
+const People = ({ slice }: PeopleProps): JSX.Element => {
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      {slice.primary.heading}
+      {slice.primary.name}
     </section>
   );
 };
 
-export default Hero;
+export default People;

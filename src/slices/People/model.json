@@ -1,0 +1,48 @@
+{
+  "id": "people",
+  "type": "SharedSlice",
+  "name": "People",
+  "description": "People",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "headshot": {
+          "type": "Image",
+          "config": {
+            "label": "Headshot",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "name": {
+          "type": "Text",
+          "config": {
+            "label": "Name",
+            "placeholder": ""
+          }
+        },
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "details": {
+          "type": "Text",
+          "config": {
+            "label": "Details",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
