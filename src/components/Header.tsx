@@ -1,7 +1,6 @@
 import { createClient } from '@/prismicio';
 import { PrismicNextLink } from '@prismicio/next';
 import Link from 'next/link';
-import { ButtonLink } from './ButtonLink';
 
 export async function Header() {
   const client = createClient();
@@ -22,9 +21,9 @@ export async function Header() {
             className="block cursor-pointer w-8 h-8 relative z-50"
             aria-label="Toggle navigation"
           >
-            <span className="absolute h-0.5 w-full bg-black top-1 transition-transform duration-300 ease-in-out peer-checked:rotate-45 peer-checked:translate-y-2.5"></span>
-            <span className="absolute h-0.5 w-full bg-black top-3.5 transition-opacity duration-300 ease-in-out peer-checked:opacity-0"></span>
-            <span className="absolute h-0.5 w-full bg-black top-6 transition-transform duration-300 ease-in-out peer-checked:-rotate-45 peer-checked:-translate-y-2.5"></span>
+            <span className="absolute h-0.5 w-full bg-black top-1 transition-transform duration-300 ease-in-out peer-checked:rotate-45 peer-checked:translate-y-2.5" />
+            <span className="absolute h-0.5 w-full bg-black top-3.5 transition-opacity duration-300 ease-in-out peer-checked:opacity-0" />
+            <span className="absolute h-0.5 w-full bg-black top-6 transition-transform duration-300 ease-in-out peer-checked:-rotate-45 peer-checked:-translate-y-2.5" />
           </label>
 
           {/* Off-canvas Mobile Navigation */}
@@ -32,7 +31,11 @@ export async function Header() {
             <nav className="h-full flex flex-col pt-24 px-6">
               <ul className="flex flex-col gap-6">
                 {settings.data.navigation.map((item) => (
-                  <li key={item.link.text}>
+                  <li
+                    key={
+                      item.link?.text ?? `${item.link ?? ''}-${item.link ?? ''}`
+                    }
+                  >
                     <PrismicNextLink
                       field={item.link}
                       className="~text-2xl/3xl hover:text-gray-600 lowercase"
@@ -40,16 +43,28 @@ export async function Header() {
                   </li>
                 ))}
               </ul>
+
+              {/* Mobile CTA (use plain link) */}
               <div className="mt-6">
-                <ButtonLink href="" color="red" aria-label="Start a project">
+                <PrismicNextLink
+                  href="/contact"
+                  aria-label="Start a project"
+                  className={`
+                    button-cutout group mx-4 inline-flex items-center
+                    rounded-full px-8 gap-3 text-lg ~py-2.5/3
+                    bg-gradient-to-b from-25% to-75% bg-[length:100%_400%]
+                    transition-[filter,background-position] duration-300 hover:bg-bottom
+                    from-brand-red to-brand-white text-brand-white hover:text-brand-black
+                  `}
+                >
                   Start A Project
-                </ButtonLink>
+                </PrismicNextLink>
               </div>
             </nav>
           </div>
 
           {/* Overlay */}
-          <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ease-in-out opacity-0 peer-checked:opacity-100 pointer-events-none peer-checked:pointer-events-auto md:hidden"></div>
+          <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ease-in-out opacity-0 peer-checked:opacity-100 pointer-events-none peer-checked:pointer-events-auto md:hidden" />
         </div>
 
         {/* Desktop Navigation */}
@@ -59,17 +74,30 @@ export async function Header() {
         >
           <ul className="flex flex-wrap items-center justify-center gap-8">
             {settings.data.navigation.map((item) => (
-              <li key={item.link.text}>
+              <li
+                key={item.link?.text ?? `${item.link ?? ''}-${item.link ?? ''}`}
+              >
                 <PrismicNextLink field={item.link} className="~text-lg/xl" />
               </li>
             ))}
           </ul>
         </nav>
 
+        {/* Desktop CTA (plain link, same styling as before) */}
         <div className="hidden md:block justify-self-end">
-          <ButtonLink href="" color="red" aria-label="Cart 1">
+          <PrismicNextLink
+            href="/contact"
+            aria-label="Start a project"
+            className={`
+              button-cutout group inline-flex items-center
+              rounded-full px-8 gap-3 text-lg ~py-2.5/3
+              bg-gradient-to-b from-25% to-75% bg-[length:100%_400%]
+              transition-[filter,background-position] duration-300 hover:bg-bottom
+              from-brand-red to-brand-white text-brand-white hover:text-brand-black
+            `}
+          >
             Start A Project
-          </ButtonLink>
+          </PrismicNextLink>
         </div>
       </div>
     </header>

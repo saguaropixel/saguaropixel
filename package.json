@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@prismicio/client": "^7.19.1",
-    "@prismicio/next": "^1.7.2",
-    "@prismicio/react": "^2.9.2",
+    "@prismicio/next": "^2.0.1",
+    "@prismicio/react": "^3.2.1",
     "@react-three/drei": "^10.6.1",
     "@react-three/fiber": "^9.3.0",
     "clsx": "^2.1.1",

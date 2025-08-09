@@ -37,7 +37,7 @@ const CactusAnimation: React.FC = () => {
     const createPixel = (x: number, y: number, z: number): Pixel => {
       const geometry = new THREE.BoxGeometry(pixelSize, pixelSize, pixelSize);
       const material = new THREE.MeshBasicMaterial({ color: 0x2ecc71 });
-      const pixel = new THREE.Mesh(geometry, material) as Pixel;
+      const pixel = new THREE.Mesh(geometry, material) as unknown as Pixel; // works, but meh
       pixel.position.set(x, y, z);
       pixel.targetY = y;
       pixel.fallSpeed = Math.random() * 0.05 + 0.05; // Random speed between 0.05 and 0.1

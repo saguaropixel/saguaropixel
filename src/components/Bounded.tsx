@@ -1,12 +1,28 @@
 import clsx from 'clsx';
-import { CSSProperties, ElementType, ReactNode } from 'react';
+import type {
+  CSSProperties,
+  ComponentType,
+  HTMLAttributes,
+  ReactNode,
+} from 'react';
+
+type ContainerTag =
+  | 'section'
+  | 'div'
+  | 'main'
+  | 'article'
+  | 'aside'
+  | 'header'
+  | 'footer'
+  | 'nav';
 
 type BoundedProps = {
-  as?: ElementType;
+  /** Only tags that can contain children, or any React component */
+  as?: ContainerTag | ComponentType<any>;
   className?: string;
   style?: CSSProperties;
-  children: ReactNode;
-};
+  children?: ReactNode;
+} & HTMLAttributes<HTMLElement>; // pragmatic: passes through common DOM props
 
 export function Bounded({
   as: Comp = 'section',
@@ -14,8 +30,9 @@ export function Bounded({
   children,
   ...restProps
 }: BoundedProps) {
+  const Tag = Comp as any; // OK: we’re intentionally pragmatic here
   return (
-    <Comp
+    <Tag
       className={clsx(
         'px-6 ~py-10/16 [.header+&]:pt-44 [.header+&]:md:pt-32',
         className
@@ -23,6 +40,6 @@ export function Bounded({
       {...restProps}
     >
       <div className="mx-auto w-full max-w-6xl">{children}</div>
-    </Comp>
+    </Tag>
   );
 }
