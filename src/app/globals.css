@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-texture {
+  background-image: url('/bg-patterns/random-grey-variations.png');
+  background-size: 480px 480px;
+  background-repeat: repeat;
+  background-position: center;
+}

@@ -3,16 +3,6 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
 		"primary": {
-			"heading": {
-				"__TYPE__": "FieldContent",
-				"value": "thumb",
-				"type": "Text"
-			},
-			"body": {
-				"__TYPE__": "FieldContent",
-				"value": "hospital",
-				"type": "Text"
-			},
 			"link": {
 				"key": "a9f6ccc5-fe33-42c6-80d6-3739b6f6e850",
 				"__TYPE__": "LinkContent",
@@ -23,7 +13,6 @@
 				}
 			},
 			"image": {
-				"__TYPE__": "ImageContent",
 				"provider": "imgix",
 				"url": "https://images.unsplash.com/photo-1529599087-bcf1dc4a7ae4?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwzfHxhcml6b25hfGVufDB8fHx8MTczODIxNDE2M3ww&ixlib=rb-4.0.3&q=85",
 				"alt": "long exposure of black concrete road",
@@ -43,7 +32,31 @@
 						"y": 0
 					}
 				},
+				"credits": null,
+				"__TYPE__": "ImageContent",
 				"thumbnails": {}
+			},
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "Section"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Mollit duis non commodo nulla cillum aute ullamco non. Consequat do ut dolore."
+						}
+					}
+				]
 			}
 		},
 		"items": []
