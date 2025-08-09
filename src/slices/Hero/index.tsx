@@ -31,9 +31,6 @@ const Hero = ({ slice }: HeroProps) => {
       </div>
       {/* <PrismicRichText field={slice.primary.body} /> */}
       <PrismicNextLink field={slice.primary.link} />
-
-      {/* <InteractiveCactus /> */}
-      {/* <InteractiveCactus2 /> */}
     </Bounded>
   );
 };

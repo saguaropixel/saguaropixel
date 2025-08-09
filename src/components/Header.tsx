@@ -1,6 +1,7 @@
 import { createClient } from '@/prismicio';
 import { PrismicNextLink } from '@prismicio/next';
 import Link from 'next/link';
+import { Button } from './ui/button';
 
 export async function Header() {
   const client = createClient();
@@ -85,7 +86,8 @@ export async function Header() {
 
         {/* Desktop CTA (plain link, same styling as before) */}
         <div className="hidden md:block justify-self-end">
-          <PrismicNextLink
+          <Button>Click Me</Button>
+          {/* <PrismicNextLink
             href="/contact"
             aria-label="Start a project"
             className={`
@@ -97,7 +99,7 @@ export async function Header() {
             `}
           >
             Start A Project
-          </PrismicNextLink>
+          </PrismicNextLink> */}
         </div>
       </div>
     </header>
