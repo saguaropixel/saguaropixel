@@ -4,9 +4,7 @@ import { Environment } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
 
-type Props = {};
-
-export function InteractiveCactus({}: Props) {
+export function InteractiveCactus() {
   return (
     <div className="absolute inset-0 z-10 flex items-center justify-center">
       <Canvas

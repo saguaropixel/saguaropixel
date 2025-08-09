@@ -16,6 +16,7 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 const Hero = ({ slice }: HeroProps): JSX.Element => {
   return (
     <Bounded
+      as="section"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="bg-gradient-to-b from-brand-yellow to-brand-white relative h-dvh overflow-hidden text-brand-black"

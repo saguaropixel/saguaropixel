@@ -5,15 +5,12 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Suspense, useRef } from 'react';
 import * as THREE from 'three';
 
-type Props = {};
-
 interface PixelProps {
   startPosition: [number, number, number];
   targetPosition: [number, number, number];
-  uniqueKey: string;
 }
 
-export function InteractiveCactus2({}: Props) {
+export function InteractiveCactus2() {
   return (
     <div className="absolute inset-0 z-10 flex items-center justify-center">
       <Canvas
@@ -28,7 +25,7 @@ export function InteractiveCactus2({}: Props) {
   );
 }
 
-function Pixel({ startPosition, targetPosition, uniqueKey }: PixelProps) {
+function Pixel({ startPosition, targetPosition }: PixelProps) {
   const ref = useRef<THREE.Mesh>(null);
   const fallSpeed = useRef(Math.random() * 0.05 + 0.05);
 
@@ -42,7 +39,7 @@ function Pixel({ startPosition, targetPosition, uniqueKey }: PixelProps) {
   });
 
   return (
-    <mesh ref={ref} position={startPosition} key={uniqueKey}>
+    <mesh ref={ref} position={startPosition}>
       <boxGeometry args={[0.75, 0.75, 0.75]} />
       <meshStandardMaterial color="#2ecc71" />
     </mesh>
@@ -75,9 +72,9 @@ function Scene() {
               const uniqueKey = `trunk-${y}-${xIdx}-${zIdx}`;
               return (
                 <Pixel
+                  key={uniqueKey}
                   startPosition={[x, startY, z]}
                   targetPosition={[x, y * pixelSize, z]}
-                  uniqueKey={uniqueKey}
                 />
               );
             }
@@ -102,9 +99,9 @@ function Scene() {
               const uniqueKey = `left-${actualY}-${xIdx}-${zIdx}`;
               return (
                 <Pixel
+                  key={uniqueKey}
                   startPosition={[x, startY, z]}
                   targetPosition={[x, actualY * pixelSize, z]}
-                  uniqueKey={uniqueKey}
                 />
               );
             }
@@ -129,9 +126,9 @@ function Scene() {
               const uniqueKey = `right-${actualY}-${xIdx}-${zIdx}`;
               return (
                 <Pixel
+                  key={uniqueKey}
                   startPosition={[x, startY, z]}
                   targetPosition={[x, actualY * pixelSize, z]}
-                  uniqueKey={uniqueKey}
                 />
               );
             }
