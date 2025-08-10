@@ -1,0 +1,58 @@
+{
+  "type": "SharedSlice",
+  "id": "hero_showcase",
+  "name": "HeroShowcase",
+  "variations": [
+    {
+      "id": "with_comparison_visual",
+      "name": "With Comparison Visual",
+      "description": "A hero section that highlights a key heading, subheading, tech stack display, and a side-by-side 'bad vs good' visual within a device frame.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "single": "heading1",
+            "label": "Title"
+          }
+        },
+        "subtitle": {
+          "type": "StructuredText",
+          "config": {
+            "single": "paragraph,strong,em,hyperlink",
+            "label": "Subtitle"
+          }
+        },
+        "tech_stack": {
+          "type": "Group",
+          "config": {
+            "label": "Tech Stack Badges",
+            "fields": {
+              "logo": {
+                "type": "Image",
+                "config": {
+                  "label": "Logo"
+                }
+              },
+              "alt_text": {
+                "type": "Text",
+                "config": {
+                  "label": "Alternative Text"
+                }
+              }
+            }
+          }
+        },
+        "device_mockup": {
+          "type": "Image",
+          "config": {
+            "label": "Device Mockup"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

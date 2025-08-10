@@ -1,0 +1,64 @@
+{
+  "type": "SharedSlice",
+  "id": "testimonial_with_avatar",
+  "name": "TestimonialWithAvatar",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "description": "Default testimonial layout with avatar, quote, author name, role, and customizable decorative accents.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "quote": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "paragraph,strong,em,hyperlink",
+            "label": "Quote"
+          }
+        },
+        "avatar": {
+          "type": "Image",
+          "config": {
+            "label": "Avatar"
+          }
+        },
+        "author_name": {
+          "type": "Text",
+          "config": {
+            "label": "Author Name"
+          }
+        },
+        "author_role": {
+          "type": "Text",
+          "config": {
+            "label": "Author Role"
+          }
+        },
+        "author_company": {
+          "type": "Text",
+          "config": {
+            "label": "Author Company"
+          }
+        },
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "Cactus Green",
+              "Sunset Yellow",
+              "Magenta",
+              "Turquoise",
+              "Dark Brown",
+              "Blue"
+            ]
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "type": "SharedSlice",
+  "id": "project_summary_showcase",
+  "name": "ProjectSummaryShowcase",
+  "variations": [
+    {
+      "id": "default_with_features_image",
+      "name": "Default with Features & Image",
+      "description": "Features a summary area, feature icon list, CTA button, and a large image or embed for showcasing the final product.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "eyebrow": {
+          "type": "StructuredText",
+          "config": {
+            "single": "heading3",
+            "label": "Eyebrow"
+          }
+        },
+        "main_title": {
+          "type": "StructuredText",
+          "config": {
+            "single": "heading1",
+            "label": "Main Title"
+          }
+        },
+        "subtitle": {
+          "type": "StructuredText",
+          "config": {
+            "single": "paragraph",
+            "label": "Subtitle"
+          }
+        },
+        "summary_title": {
+          "type": "StructuredText",
+          "config": {
+            "single": "heading2",
+            "label": "Summary Title"
+          }
+        },
+        "summary_text": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "paragraph,strong,em,hyperlink",
+            "label": "Summary Text"
+          }
+        },
+        "primary_button": {
+          "type": "Link",
+          "config": {
+            "label": "Primary Button",
+            "allowText": true,
+            "repeat": false,
+            "select": null
+          }
+        },
+        "features": {
+          "type": "Group",
+          "config": {
+            "label": "Features",
+            "fields": {
+              "icon": {
+                "type": "Image",
+                "config": {
+                  "label": "Icon"
+                }
+              },
+              "text": {
+                "type": "Text",
+                "config": {
+                  "label": "Text"
+                }
+              }
+            }
+          }
+        },
+        "preview_image": {
+          "type": "Image",
+          "config": {
+            "label": "Preview Image"
+          }
+        }
+      }
+    }
+  ]
+}

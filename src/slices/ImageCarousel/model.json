@@ -1,0 +1,37 @@
+{
+  "type": "SharedSlice",
+  "id": "image_carousel",
+  "name": "ImageCarousel",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "description": "Three-image landscape carousel with navigation arrows.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "slides": {
+          "type": "Group",
+          "config": {
+            "label": "Slides",
+            "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "Image"
+                }
+              }
+            }
+          }
+        },
+        "show_navigation": {
+          "type": "Boolean",
+          "config": {
+            "label": "Show Navigation Controls"
+          }
+        }
+      }
+    }
+  ]
+}

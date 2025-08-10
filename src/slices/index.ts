@@ -5,5 +5,11 @@ import dynamic from "next/dynamic";
 export const components = {
   card: dynamic(() => import("./Card")),
   hero: dynamic(() => import("./Hero")),
+  hero_showcase: dynamic(() => import("./HeroShowcase")),
+  image_carousel: dynamic(() => import("./ImageCarousel")),
+  media_split_content: dynamic(() => import("./MediaSplitContent")),
   people: dynamic(() => import("./People")),
+  process_with_image_steps: dynamic(() => import("./ProcessWithImageSteps")),
+  project_summary_showcase: dynamic(() => import("./ProjectSummaryShowcase")),
+  testimonial_with_avatar: dynamic(() => import("./TestimonialWithAvatar")),
 };
