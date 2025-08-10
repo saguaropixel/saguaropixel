@@ -55,14 +55,6 @@
 									"credits": null,
 									"__TYPE__": "ImageContent"
 								}
-							],
-							[
-								"alt_text",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "fifth",
-									"type": "Text"
-								}
 							]
 						]
 					}

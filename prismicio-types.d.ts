@@ -565,16 +565,6 @@ export interface HeroShowcaseSliceWithComparisonVisualPrimaryTechStackItem {
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
   logo: prismic.ImageField<never>;
-
-  /**
-   * Alternative Text field in *HeroShowcase → With Comparison Visual → Primary → Tech Stack Badges*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero_showcase.with_comparison_visual.primary.tech_stack[].alt_text
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  alt_text: prismic.KeyTextField;
 }
 
 /**

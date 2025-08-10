@@ -1,6 +1,7 @@
-import { FC } from "react";
-import { Content } from "@prismicio/client";
-import { SliceComponentProps } from "@prismicio/react";
+import { Content } from '@prismicio/client';
+import { PrismicNextImage } from '@prismicio/next';
+import { PrismicRichText, SliceComponentProps } from '@prismicio/react';
+import { FC } from 'react';
 
 /**
  * Props for `HeroShowcase`.
@@ -20,6 +21,12 @@ const HeroShowcase: FC<HeroShowcaseProps> = ({ slice }) => {
       slices.
       <br />
       <strong>You can edit this slice directly in your code editor.</strong>
+      <PrismicRichText field={slice.primary.title} />
+      <PrismicRichText field={slice.primary.subtitle} />
+      {slice.primary.tech_stack.map((item, i) => (
+        <PrismicNextImage key={i} field={item.logo} />
+      ))}
+      <PrismicNextImage field={slice.primary.device_mockup} />
       {/**
        * 💡 Use Prismic MCP with your code editor
        *

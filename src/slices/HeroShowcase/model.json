@@ -35,12 +35,6 @@
                 "config": {
                   "label": "Logo"
                 }
-              },
-              "alt_text": {
-                "type": "Text",
-                "config": {
-                  "label": "Alternative Text"
-                }
               }
             }
           }
