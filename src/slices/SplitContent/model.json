@@ -1,0 +1,31 @@
+{
+  "type": "SharedSlice",
+  "id": "split_content",
+  "name": "SplitContent",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "description": "Left side contains a heading, right side contains a flexible rich text area for detailed description.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "single": "heading2",
+            "label": "Heading"
+          }
+        },
+        "content": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "paragraph,strong,em,hyperlink",
+            "label": "Content"
+          }
+        }
+      }
+    }
+  ]
+}

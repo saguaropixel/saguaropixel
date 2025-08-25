@@ -1,0 +1,26 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"use_latest_when_empty": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			},
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "pig",
+				"type": "Text"
+			},
+			"project": {
+				"key": "a5306a27-9c0e-442a-b3e6-e4bac2ba7e0a",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
+			}
+		},
+		"items": []
+	}
+]

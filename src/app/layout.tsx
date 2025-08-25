@@ -1,19 +1,16 @@
 import { Header } from '@/components/Header';
-import { Nunito, Nunito_Sans } from 'next/font/google';
+import { Nunito_Sans, Tiny5 } from 'next/font/google';
 import './globals.css';
 
-const nunito = Nunito({
+const tiny5 = Tiny5({
+  weight: '400', // Tiny5 is display-only, has single weight
   subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-nunito',
-  weight: '400',
+  variable: '--font-tiny5',
 });
 
 const nunitoSans = Nunito_Sans({
   subsets: ['latin'],
-  display: 'swap',
   variable: '--font-nunito-sans',
-  weight: '900',
 });
 
 export default function RootLayout({
@@ -24,11 +21,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nunito.variable} ${nunitoSans.variable} antialiased font-nunito font-medium text-zinc-800`}
+        className={`${tiny5.variable} ${nunitoSans.variable} antialiased font-nunito font-medium text-zinc-800`}
       >
         <main>
           <Header />
+          {/* <Providers> */}
           {children}
+          {/* </Providers> */}
         </main>
       </body>
     </html>

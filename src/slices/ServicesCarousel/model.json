@@ -1,0 +1,74 @@
+{
+  "id": "services_carousel",
+  "type": "SharedSlice",
+  "name": "ServicesCarousel",
+  "description": "ServicesCarousel",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "section_title": {
+          "type": "Text",
+          "config": {
+            "label": "Section Title",
+            "placeholder": ""
+          }
+        },
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Items",
+            "repeat": true,
+            "fields": {
+              "service_ref": {
+                "type": "Link",
+                "config": {
+                  "label": "Service Ref",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    {
+                      "id": "service_card",
+                      "fields": [
+                        "title",
+                        "summary",
+                        {
+                          "id": "color",
+                          "customtypes": [
+                            {
+                              "id": "brand_color",
+                              "fields": [
+                                "name",
+                                "value"
+                              ]
+                            }
+                          ]
+                        },
+                        "link"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "highlight": {
+                "type": "Boolean",
+                "config": {
+                  "label": "Highlight",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

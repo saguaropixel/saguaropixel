@@ -71,7 +71,7 @@ export async function Header() {
         {/* Desktop Navigation */}
         <nav
           aria-label="Main"
-          className="hidden md:block col-span-full row-start-2 md:col-span-1 md:col-start-2 md:row-start-1 bg-brand-white rounded-full py-3 px-6"
+          className="hidden md:block col-span-full row-start-2 md:col-span-1 md:col-start-2 md:row-start-1 bg-off-white-500 rounded-full py-3 px-6"
         >
           <ul className="flex flex-wrap items-center justify-center gap-8">
             {settings.data.navigation.map((item) => (
@@ -86,7 +86,7 @@ export async function Header() {
 
         {/* Desktop CTA (plain link, same styling as before) */}
         <div className="hidden md:block justify-self-end">
-          <Button>Click Me</Button>
+          <Button value="destructive">Click Me</Button>
           {/* <PrismicNextLink
             href="/contact"
             aria-label="Start a project"

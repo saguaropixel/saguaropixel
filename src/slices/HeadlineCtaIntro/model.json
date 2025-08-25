@@ -1,0 +1,48 @@
+{
+  "type": "SharedSlice",
+  "id": "headline_cta_intro",
+  "name": "HeadlineCtaIntro",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "description": "Standard layout with a headline, a row of prominent call-to-action buttons, and a short intro text.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "headline": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "heading1",
+            "label": "Headline"
+          }
+        },
+        "cta_buttons": {
+          "type": "Link",
+          "config": {
+            "label": "CTA Buttons",
+            "placeholder": "",
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "solid",
+              "outline",
+              "ghost",
+              "link"
+            ],
+            "select": null
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "paragraph,strong,em",
+            "label": "Description"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

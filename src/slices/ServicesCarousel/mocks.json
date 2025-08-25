@@ -1,0 +1,42 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"section_title": {
+				"__TYPE__": "FieldContent",
+				"value": "plenty",
+				"type": "Text"
+			},
+			"items": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"service_ref",
+								{
+									"key": "f8f5d908-b23b-4466-8614-5f6b73db998e",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "DocumentLink",
+										"id": "mock_document_id"
+									}
+								}
+							],
+							[
+								"highlight",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": true
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

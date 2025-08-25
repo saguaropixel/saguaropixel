@@ -11,6 +11,18 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "featured_projects": {
+              "type": "SharedSlice"
+            },
+            "services_carousel": {
+              "type": "SharedSlice"
+            },
+            "split_content": {
+              "type": "SharedSlice"
+            },
+            "hero_pixel_art": {
+              "type": "SharedSlice"
+            },
             "hero": {
               "type": "SharedSlice"
             }

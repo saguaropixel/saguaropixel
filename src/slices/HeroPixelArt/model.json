@@ -1,0 +1,61 @@
+{
+  "type": "SharedSlice",
+  "id": "hero_pixel_art",
+  "name": "HeroPixelArt",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "description": "Default layout with main headline, two action buttons, and pixel art/decorative imagery.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "first_line": {
+          "type": "Text",
+          "config": {
+            "label": "First Line",
+            "placeholder": ""
+          }
+        },
+        "second_line": {
+          "type": "Text",
+          "config": {
+            "label": "Second Line",
+            "placeholder": ""
+          }
+        },
+        "graphic": {
+          "type": "Image",
+          "config": {
+            "label": "Decorative Image"
+          }
+        },
+        "primary_action": {
+          "type": "Link",
+          "config": {
+            "label": "Primary Action Button",
+            "placeholder": "",
+            "allowText": true,
+            "repeat": false,
+            "select": null,
+            "variants": ["solid", "outline", "ghost", "link"]
+          }
+        },
+        "secondary_action": {
+          "type": "Link",
+          "config": {
+            "label": "Secondary Action Button",
+            "placeholder": "",
+            "allowText": true,
+            "repeat": false,
+            "select": null,
+            "variants": ["solid", "outline", "ghost", "link"]
+          }
+        }
+      },
+
+      "items": {}
+    }
+  ]
+}

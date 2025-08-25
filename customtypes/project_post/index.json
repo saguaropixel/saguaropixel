@@ -12,6 +12,45 @@
           "label": "project_post"
         }
       },
+      "project_title": {
+        "type": "Text",
+        "config": {
+          "label": "Project Title",
+          "placeholder": ""
+        }
+      },
+      "excerpt": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Excerpt",
+          "placeholder": "",
+          "allowTargetBlank": false,
+          "multi": "paragraph,strong"
+        }
+      },
+      "project_date": {
+        "type": "Date",
+        "config": {
+          "label": "Project Date",
+          "placeholder": ""
+        }
+      },
+      "client_name": {
+        "type": "Text",
+        "config": {
+          "label": "Client Name",
+          "placeholder": ""
+        }
+      },
+      "featured": {
+        "type": "Boolean",
+        "config": {
+          "label": "Featured",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",

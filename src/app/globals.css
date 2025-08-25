@@ -9,8 +9,6 @@
   background-position: center;
 }
 
-
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -67,8 +65,6 @@
   }
 }
 
-
-
 @layer base {
   * {
     @apply border-border;
@@ -77,3 +73,80 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer base {
+  h1 {
+    @apply text-h1 font-heading;
+  }
+  h2 {
+    @apply text-h2 font-heading;
+  }
+  h3 {
+    @apply text-h3 font-heading;
+  }
+  h4 {
+    @apply text-h4 font-heading;
+  }
+
+  /* Aliases (pick what you prefer) */
+  h5 {
+    @apply text-body-lg font-heading;
+  } /* or text-h4 */
+  h6 {
+    @apply text-body font-heading;
+  } /* or text-h4 */
+
+  p {
+    @apply text-body font-sans;
+  }
+  small {
+    @apply text-body-xs font-sans;
+  } /* instead of text-small */
+  button,
+  [type='button'],
+  [type='submit'],
+  [role='button'] {
+    @apply font-heading;
+  }
+}
+
+/* @layer base {
+  h1 {
+    @apply text-h1 font-heading;
+  }
+  h2 {
+    @apply text-h2 font-heading;
+  }
+  h3 {
+    @apply text-h3 font-heading;
+  }
+  h4 {
+    @apply text-h4 font-heading;
+  }
+  h5 {
+    @apply text-h5 font-heading;
+  }
+  h6 {
+    @apply text-h6 font-heading;
+  }
+
+  p {
+    @apply text-body font-sans;
+  }
+  small {
+    @apply text-small font-sans;
+  }
+
+  /* Buttons = Tiny5 */
+/* button,
+[type='button'],
+[type='submit'],
+[role='button'] {
+  @apply font-heading;
+} */
+
+/* Links = Nunito Sans */
+/* a {
+    @apply font-sans;
+  } */
+/* }  */

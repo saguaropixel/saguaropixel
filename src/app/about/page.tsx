@@ -1,20 +1,26 @@
-import { Metadata } from "next";
-import { isFilled, asImageSrc } from "@prismicio/client";
-import { SliceZone } from "@prismicio/react";
+import { asImageSrc, isFilled } from '@prismicio/client';
+import { SliceZone } from '@prismicio/react';
+import { Metadata } from 'next';
 
-import { createClient } from "@/prismicio";
-import { components } from "@/slices";
+import DisableTrail from '@/components/effects/DisableTrail';
+import { createClient } from '@/prismicio';
+import { components } from '@/slices';
 
 export default async function Page() {
   const client = createClient();
-  const page = await client.getSingle("about");
+  const page = await client.getSingle('about');
 
-  return <SliceZone slices={page.data.slices} components={components} />;
+  return (
+    <>
+      <DisableTrail />
+      <SliceZone slices={page.data.slices} components={components} />
+    </>
+  );
 }
 
 export async function generateMetadata(): Promise<Metadata> {
   const client = createClient();
-  const page = await client.getSingle("about");
+  const page = await client.getSingle('about');
 
   return {
     title: page.data.meta_title,

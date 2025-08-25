@@ -1,0 +1,31 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Widely"
+						}
+					}
+				]
+			},
+			"content": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Eiusmod in cupidatat labore proident enim eiusmod quis labore est esse eiusmod et laboris."
+						}
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

@@ -1,0 +1,58 @@
+{
+  "id": "featured_projects",
+  "type": "SharedSlice",
+  "name": "FeaturedProjects",
+  "description": "FeaturedProjects",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "use_latest_when_empty": {
+          "type": "Boolean",
+          "config": {
+            "label": "Use Latest When Empty",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
+        },
+        "project": {
+          "type": "Link",
+          "config": {
+            "label": "Project",
+            "select": "document",
+            "repeat": false,
+            "customtypes": [
+              {
+                "id": "project_post",
+                "fields": [
+                  "project_title",
+                  "excerpt",
+                  "project_date",
+                  "client_name",
+                  "featured",
+                  "meta_title",
+                  "meta_description",
+                  "meta_image"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
