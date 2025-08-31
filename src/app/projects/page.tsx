@@ -4,17 +4,28 @@ import { getProjects } from '@/lib/projects';
 
 export const revalidate = 60; // safety net; webhook will do the heavy lifting
 
+type SearchParams = {
+  page?: string | string[];
+};
+
 export default async function ProjectsPage({
   searchParams,
 }: {
-  searchParams: { page?: string };
+  // Next.js 15 passes searchParams as a Promise
+  searchParams: Promise<SearchParams>;
 }) {
-  const page = Number(searchParams?.page ?? '1');
+  const params = await searchParams;
+  const rawPage = params?.page;
+  const page = Number(Array.isArray(rawPage) ? rawPage[0] : (rawPage ?? '1'));
+
   const {
     results,
     page: current,
     total_pages,
-  } = await getProjects({ page, pageSize: 9 });
+  } = await getProjects({
+    page,
+    pageSize: 9,
+  });
 
   return (
     <main className="container mx-auto px-4 py-16">
