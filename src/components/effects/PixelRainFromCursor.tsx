@@ -5,20 +5,20 @@ import { useEffect, useRef } from 'react';
 
 type PixelRainFromCursorProps = {
   colors?: string[]; // brand palette
-  blockSize?: number; // square size in CSS px (e.g., 10–16)
+  blockSize?: number; // square size (px)
   cap?: number; // max on-screen particles
-  gravity?: number; // px per ms^2 (tweak fall feel)
-  speed?: { min: number; max: number }; // initial downward speed (px per ms)
+  gravity?: number; // px per ms^2
+  speed?: { min: number; max: number }; // initial fall speed (px per ms)
   spawnOnMove?: { min: number; max: number }; // how many per mouse move
-  spawnOnWheel?: number; // extra when scrolling (flare)
+  spawnOnWheel?: number; // extra when scrolling
   snapToGrid?: boolean; // snap x/y to block grid
   respectReducedMotion?: boolean;
 };
 
 type Drop = {
-  x: number; // css px
-  y: number; // css px
-  vy: number; // css px per ms
+  x: number; // px
+  y: number; // px
+  vy: number; // px per ms
   size: number;
   color: string;
   life: number; // ms since spawn
@@ -28,8 +28,8 @@ export default function PixelRainFromCursor({
   colors = ['#F62972', '#19DEC8', '#272523', '#F0F4F7', '#08B7C9'],
   blockSize = 20,
   cap = 500,
-  gravity = 0.0028, // gentle acceleration
-  speed = { min: 0.08, max: 0.14 }, // initial fall speed
+  gravity = 0.0028,
+  speed = { min: 0.08, max: 0.14 },
   spawnOnMove = { min: 4, max: 10 },
   spawnOnWheel = 8,
   snapToGrid = true,
@@ -40,50 +40,56 @@ export default function PixelRainFromCursor({
   const dropsRef = useRef<Drop[]>([]);
   const dprRef = useRef(1);
   const lastPosRef = useRef<{ x: number; y: number } | null>(null);
-  // if (document.body?.dataset.noTrail === 'true') return;
+
   useEffect(() => {
+    // Respect reduced motion and optional body flag (noTrail)
     const prefersReduced =
       respectReducedMotion &&
       typeof window !== 'undefined' &&
       window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
+
+    if (prefersReduced || document.body?.dataset.noTrail === 'true') return;
 
     // canvas overlay
     const canvas = document.createElement('canvas');
     canvasRef.current = canvas;
-    Object.assign(canvas.style, {
-      position: 'fixed',
-      inset: '0',
-      width: '100%',
-      height: '100%',
-      pointerEvents: 'none',
-      zIndex: '40',
-    } as CSSStyleDeclaration);
+
+    // set styles without casting
+    canvas.style.position = 'fixed';
+    canvas.style.inset = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '40';
+
     document.body.appendChild(canvas);
 
-    const ctx = canvas.getContext('2d')!;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
     const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
     dprRef.current = dpr;
 
     const resize = () => {
-      canvas.width = Math.floor(window.innerWidth * dpr);
-      canvas.height = Math.floor(window.innerHeight * dpr);
+      canvas.width = Math.floor(window.innerWidth * dprRef.current);
+      canvas.height = Math.floor(window.innerHeight * dprRef.current);
     };
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
+    // helpers
     const rand = (min: number, max: number) =>
       Math.random() * (max - min) + min;
     const pick = <T,>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)];
     const roundTo = (n: number, step: number) => Math.round(n / step) * step;
 
+    // spawn drops
     const spawn = (x: number, y: number, count: number) => {
-      const size = blockSize;
       const arr = dropsRef.current;
       const step = snapToGrid ? blockSize : 1;
 
       for (let i = 0; i < count; i++) {
-        const jitterX = snapToGrid ? 0 : rand(-1.5, 1.5); // tiny wiggle if not snapping
+        const jitterX = snapToGrid ? 0 : rand(-1.5, 1.5);
         const startX = snapToGrid ? roundTo(x, step) : x + jitterX;
         const startY = snapToGrid ? roundTo(y, step) : y;
 
@@ -91,7 +97,7 @@ export default function PixelRainFromCursor({
           x: startX,
           y: startY,
           vy: rand(speed.min, speed.max),
-          size,
+          size: blockSize,
           color: pick(colors),
           life: 0,
         });
@@ -99,6 +105,7 @@ export default function PixelRainFromCursor({
       if (arr.length > cap) arr.splice(0, arr.length - cap);
     };
 
+    // events
     const onMove = (e: MouseEvent) => {
       lastPosRef.current = { x: e.clientX, y: e.clientY };
       const count = Math.floor(rand(spawnOnMove.min, spawnOnMove.max + 1));
@@ -124,7 +131,6 @@ export default function PixelRainFromCursor({
       const dprNow = dprRef.current;
       const grid = blockSize;
 
-      // draw each drop
       const arr = dropsRef.current;
       for (let i = arr.length - 1; i >= 0; i--) {
         const d = arr[i];
@@ -133,11 +139,11 @@ export default function PixelRainFromCursor({
         d.vy += gravity * dt; // accelerate
         d.y += d.vy * dt; // move
 
-        // snap to grid for tetris feel (only on draw)
+        // snap to grid (draw-time)
         const drawX = snapToGrid ? Math.round(d.x / grid) * grid : d.x;
         const drawY = snapToGrid ? Math.round(d.y / grid) * grid : d.y;
 
-        // very subtle fade near the bottom edge so they don't pop
+        // subtle fade near bottom
         const bottomFadePx = 120;
         const distToBottom = canvas.height / dprNow - drawY;
         const alpha =
@@ -165,6 +171,7 @@ export default function PixelRainFromCursor({
 
     rafRef.current = requestAnimationFrame(tick);
 
+    // cleanup
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       window.removeEventListener('mousemove', onMove);

@@ -15,7 +15,7 @@ export default [
   {
     files: ['src/components/Bounded.tsx'],
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
     },
   },
 ];

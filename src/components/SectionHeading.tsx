@@ -14,7 +14,7 @@ export function SectionHeading({
   lineColor = '#E7A917',
   // as = 'h1',
   underlineWidth = '80%',
-  className,
+  // className,
 }: SectionHeadingProps) {
   // const Tag = as;
 
@@ -24,8 +24,8 @@ export function SectionHeading({
         className="relative inline-block"
         style={
           {
-            ['--heading-underline' as any]: lineColor,
-            ['--underline-width' as any]:
+            ['--heading-underline' as string]: lineColor,
+            ['--underline-width' as string]:
               typeof underlineWidth === 'number'
                 ? `${underlineWidth}px`
                 : underlineWidth,

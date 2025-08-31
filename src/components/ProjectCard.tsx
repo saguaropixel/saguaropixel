@@ -17,15 +17,15 @@ export function ProjectCard({ doc }: { doc: any }) {
   // const title = readText(doc?.data?.project_title) || 'Untitled';
   // const excerpt = readText(doc?.data?.excerpt);
   const href = `/projects/${doc?.uid}`;
-  console.log(doc);
   return (
     <Card className="border-2 rounded-none">
       <CardContent className="p-4">
-        {isFilled.image(doc?.data?.featured_image) && (
+        {isFilled.image(doc?.data?.meta_image) && (
           <div className="mb-4 overflow-hidden rounded-none">
             <PrismicNextImage
-              field={doc.data.featured_image}
+              field={doc.data.meta_image}
               className="w-full h-auto"
+              alt={doc.data.project_title}
             />
           </div>
         )}

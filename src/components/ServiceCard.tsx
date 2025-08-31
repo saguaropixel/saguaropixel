@@ -1,15 +1,23 @@
 // components/ServiceCard.tsx
 import { CardContent, Card as UiCard } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
+import type { LinkField, RichTextField } from '@prismicio/client';
+import { isFilled } from '@prismicio/client';
 import { PrismicNextLink } from '@prismicio/next';
 import { PrismicRichText } from '@prismicio/react';
+import * as React from 'react';
 
 type Props = {
   title: string;
-  summary?: any; // Prismic RichText
-  link?: any; // Prismic Link
+  summary?: RichTextField | null;
+  link?: LinkField | null;
   color?: string; // accent hex
   highlighted?: boolean;
+};
+
+// Type-safe CSS custom property (no `any`)
+type AccentStyle = React.CSSProperties & {
+  ['--accent']?: string;
 };
 
 export function ServiceCard({
@@ -19,12 +27,14 @@ export function ServiceCard({
   color = '#ff2e7a',
   highlighted = false,
 }: Props) {
+  const style: AccentStyle = { '--accent': color };
+
   return (
     <UiCard
       aria-selected={highlighted}
-      style={{ ['--accent' as any]: color }}
+      style={style}
       className={cn(
-        'border-2 transition-colors group rounded-none', // 👈 added rounded-none
+        'border-2 transition-colors group rounded-none',
         // default (dark)
         'bg-transparent border-neutral-700 text-white',
         // hover/focus -> accent color takeover
@@ -59,7 +69,7 @@ export function ServiceCard({
           </div>
         )}
 
-        {link && (
+        {link && isFilled.link(link) && (
           <div className="mt-6">
             <PrismicNextLink
               field={link}

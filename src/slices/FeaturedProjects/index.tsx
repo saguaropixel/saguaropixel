@@ -122,18 +122,19 @@ export default async function FeaturedProjects({
             >
               {/* Image */}
               <div className={`md:col-span-6 ${imgOrder} md:self-center`}>
-                {isFilled.image(doc?.data?.featured_image) ? (
+                {isFilled.image(doc?.data?.meta_image) ? (
                   <div className={`relative ${imgBump} md:transform-gpu`}>
                     {/* ⬅️ stagger here */}
-                    <div className="overflow-hidden rounded-2xl border-2">
+                    <div className="overflow-hidden rounded-none">
                       <PrismicNextImage
-                        field={doc.data.featured_image}
+                        field={doc.data.meta_image}
                         className="w-full h-auto"
+                        alt={doc.data.project_title}
                       />
                     </div>
                   </div>
                 ) : (
-                  <div className="aspect-[16/10] rounded-2xl border-2 grid place-items-center text-sm opacity-60">
+                  <div className="aspect-[16/10] rounded-none grid place-items-center text-sm opacity-60">
                     No image selected
                   </div>
                 )}
