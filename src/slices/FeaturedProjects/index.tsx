@@ -1,19 +1,23 @@
 import { SectionHeading } from '@/components/SectionHeading';
 import { Button } from '@/components/ui/button';
 import { createClient } from '@/prismicio';
+import type { Content } from '@prismicio/client';
 import * as prismic from '@prismicio/client';
-import { isFilled, type Content } from '@prismicio/client';
-import { PrismicNextImage } from '@prismicio/next';
 import { PrismicRichText, type SliceComponentProps } from '@prismicio/react';
 import Link from 'next/link';
 
-const tag = (t: string[]) => ({ fetchOptions: { next: { tags: t } } });
+import LaptopMock from '@/components/LaptopMock';
 
-// function readText(field: unknown): string {
-//   if (Array.isArray(field)) return asText(field); // Rich Text
-//   if (typeof field === 'string') return field; // Key Text
-//   return '';
-// }
+import {
+  asArrayOfObjects,
+  pickRelationship,
+  readBool,
+  readImage,
+  readKeyText,
+  readRichText,
+} from '@/lib/prismic-helpers';
+
+const tag = (t: string[]) => ({ fetchOptions: { next: { tags: t } } });
 
 export type FeaturedProjectsProps =
   SliceComponentProps<Content.FeaturedProjectsSlice>;
@@ -23,40 +27,53 @@ export default async function FeaturedProjects({
 }: FeaturedProjectsProps) {
   const client = createClient();
 
-  // --- collect up to 3 picked IDs from BOTH possible shapes ---
-  const fromItems = (
-    Array.isArray((slice as any).items) ? (slice as any).items : []
-  )
-    .map((it: any) => {
-      const link = it.project ?? it.projects; // support "project" or "projects"
-      return isFilled.contentRelationship(link) ? (link.id as string) : null;
-    })
-    .filter(Boolean) as string[];
+  // Collect up to 3 picked IDs from BOTH possible shapes (`project` or `projects`)
+  const fromItems: string[] = (slice.items ?? [])
+    .map(
+      (it) =>
+        pickRelationship<'project_post'>(it as Record<string, unknown>, [
+          'project',
+          'projects',
+        ])?.id
+    )
+    .filter((v): v is string => !!v);
 
-  const fromPrimaryGroup = (
-    Array.isArray((slice as any).primary?.items)
-      ? (slice as any).primary.items
-      : []
-  )
-    .map((it: any) => {
-      const link = it.project ?? it.projects;
-      return isFilled.contentRelationship(link) ? (link.id as string) : null;
-    })
-    .filter(Boolean) as string[];
+  const primaryItems =
+    (slice.primary as unknown as { items?: unknown[] })?.items ?? [];
+
+  const fromPrimaryGroup: string[] = Array.isArray(primaryItems)
+    ? primaryItems
+        .map(
+          (it) =>
+            pickRelationship<'project_post'>(it as Record<string, unknown>, [
+              'project',
+              'projects',
+            ])?.id
+        )
+        .filter((v): v is string => !!v)
+    : [];
 
   const selectedIds = [...fromItems, ...fromPrimaryGroup].slice(0, 3);
 
-  // --- fetch selected docs (keep order later) ---
-  let selected = selectedIds.length
-    ? await client
-        .getByIDs(selectedIds, { ...tag(['project_post']) })
-        .then((r) => r.results)
-    : [];
+  // Fetch selected docs (keep order later)
+  let selected: Content.ProjectPostDocument[] =
+    selectedIds.length > 0
+      ? await client
+          .getByIDs<Content.ProjectPostDocument>(selectedIds, {
+            ...tag(['project_post']),
+          })
+          .then((r) => r.results)
+      : [];
 
-  // --- fallback with latest to fill remaining ---
-  if (selected.length < 3 && (slice as any).primary?.use_latest_when_empty) {
-    const latest = await client.get({
-      filters: [prismic.filter.at('document.type', 'project_post')], // ✅ correct filter helper
+  // Fallback with latest to fill remaining
+  const useLatest = readBool(
+    (slice.primary as unknown as { use_latest_when_empty?: unknown })
+      ?.use_latest_when_empty
+  );
+
+  if (selected.length < 3 && useLatest) {
+    const latest = await client.get<Content.ProjectPostDocument>({
+      filters: [prismic.filter.at('document.type', 'project_post')],
       pageSize: 6,
       orderings: [{ field: 'my.project_post.project_date', direction: 'desc' }],
       ...tag(['project_post']),
@@ -71,7 +88,7 @@ export default async function FeaturedProjects({
 
   if (!selected.length) return null;
 
-  // keep editor order first, then fallbacks
+  // Keep editor order first, then fallbacks
   if (selectedIds.length) {
     selected.sort((a, b) => {
       const ia = selectedIds.indexOf(a.id);
@@ -83,92 +100,95 @@ export default async function FeaturedProjects({
     });
   }
 
-  const heading = (slice as any).primary?.heading || 'Featured Projects';
+  const headingText =
+    readKeyText((slice.primary as unknown as { heading?: unknown })?.heading) ||
+    'Featured Projects';
 
   return (
-    <section className="container mx-auto px-4 py-16 md:py-24">
-      {/* <h2 className="font-[var(--font-tiny5)] text-4xl md:text-6xl tracking-tight mb-10">
-        {heading}
-      </h2> */}
+    <section className="mx-auto max-w-screen-2xl px-4 py-16 md:py-24 overflow-x-clip">
+      <SectionHeading title={headingText} lineColor="#E7A917" as="h1" />
 
-      <SectionHeading
-        title={heading}
-        lineColor="#E7A917" // or "rgb(231 169 23)" or "hsl(var(--brand-yellow))"
-        as="h1"
-        // className="text-4xl md:text-6xl tracking-tight"
-      />
-
-      <div className="grid gap-10 md:gap-12">
-        {selected.slice(0, 3).map((doc: any, i: number) => {
-          // const title = readText(doc?.data?.project_title) || 'Project';
-          // const excerpt = readText(doc?.data?.excerpt);
-          const href = `/projects/${doc?.uid}`;
-
-          // inside the .map(...)
+      {/* bigger vertical rhythm to match the comp */}
+      <div className="grid gap-20 md:gap-28">
+        {selected.slice(0, 3).map((doc, i) => {
+          const href = `/projects/${doc.uid}`;
           const reverse = i % 2 === 1;
+          // 1) Row stagger (layout offset)
+          const rowStagger =
+            i === 1 ? 'md:mt-8' : i === 2 ? 'md:mt-16' : 'md:mt-0';
 
-          // stagger only the IMAGE content (not the grid item)
+          // 2) Micro image-only bump (visual)
           const imgBump =
-            i === 1 ? 'md:translate-y-6' : i === 2 ? 'md:translate-y-12' : '';
+            i === 1 ? 'md:translate-y-8' : i === 2 ? 'md:translate-y-16' : '';
 
-          // swap columns with order on md+
+          // 3) Bleed with TRANSFORM (doesn't alter layout width)
+          const bleed = reverse
+            ? // bleed to the RIGHT when image is on the right
+              'md:translate-x-[calc(50vw-50%)] md:translate-x-8 lg:translate-x-12'
+            : // bleed to the LEFT when image is on the left
+              'md:translate-x-[calc(-1*(50vw-50%))] md:-translate-x-8 lg:-translate-x-12';
+
+          // 4) Side-aware padding for the text column (keeps it off the edge)
+          const textGutter = reverse ? 'md:pl-8 lg:pl-16' : 'md:pr-8 lg:pr-16';
+
+          // 5) Order on md+
           const imgOrder = reverse ? 'md:order-2' : 'md:order-1';
           const textOrder = reverse ? 'md:order-1' : 'md:order-2';
 
+          const img = readImage(doc.data.meta_image);
+          const title = readKeyText(doc.data.project_title);
+          const excerpt = readRichText(doc.data.excerpt);
+
+          // technology: optional array of objects with optional `name`
+          type Tech = { name?: string | null };
+          const tech: Tech[] = asArrayOfObjects<Tech>(
+            (doc.data as unknown as { technology?: unknown }).technology
+          )
+            ? ((doc.data as unknown as { technology?: Tech[] })
+                .technology as Tech[])
+            : [];
+
+          const techNames = tech
+            .map((t) => (t?.name ?? '').trim())
+            .filter(Boolean);
           return (
             <article
               key={doc.id}
-              className="grid md:grid-cols-12 md:gap-x-12 gap-y-8 md:items-center" // ⬅️ center vertically
+              className={`grid gap-y-10 md:grid-cols-12 md:gap-x-12 md:items-center ${rowStagger}`}
             >
-              {/* Image */}
-              <div className={`md:col-span-6 ${imgOrder} md:self-center`}>
-                {isFilled.image(doc?.data?.meta_image) ? (
-                  <div className={`relative ${imgBump} md:transform-gpu`}>
-                    {/* ⬅️ stagger here */}
-                    <div className="overflow-hidden rounded-none">
-                      <PrismicNextImage
-                        field={doc.data.meta_image}
-                        className="w-full h-auto"
-                        alt={doc.data.project_title}
-                      />
-                    </div>
+              {/* Laptop + image */}
+              <div className={`md:col-span-6 ${imgOrder}`}>
+                <div className={`md:transform-gpu ${imgBump}`}>
+                  {/* Use transform-only bleed; do NOT use ml/mr calc here */}
+                  <div className={`md:transform ${bleed}`}>
+                    <LaptopMock
+                      img={img ?? null}
+                      tech={techNames as string[]}
+                    />
                   </div>
-                ) : (
-                  <div className="aspect-[16/10] rounded-none grid place-items-center text-sm opacity-60">
-                    No image selected
-                  </div>
-                )}
+                </div>
               </div>
 
               {/* Text */}
               <div
-                className={`md:col-span-6 ${textOrder} md:self-center flex flex-col justify-center`}
+                className={`md:col-span-6 ${textOrder} ${textGutter} md:self-center flex flex-col justify-center`}
               >
-                <h3 className="font-[var(--font-tiny5)] text-3xl md:text-5xl mb-3">
-                  {doc?.data?.project_title}
+                <h3 className="font-[var(--font-tiny5)] text-4xl md:text-5xl mb-3">
+                  {title || 'Project'}
                 </h3>
-                {/* {excerpt && <p className="opacity-80 mb-5">{excerpt}</p>} */}
-                <div className="opacity-80 mb-5">
-                  <PrismicRichText field={doc?.data?.excerpt} />
+
+                <div className="opacity-80 mb-5 max-w-prose">
+                  {excerpt && <PrismicRichText field={excerpt} />}
                 </div>
+
                 <div className="flex flex-wrap gap-3">
-                  <Button asChild>
+                  <Button asChild tone={'blue'}>
                     <Link href={href}>View this project</Link>
                   </Button>
-                  <Button variant="outline" asChild>
+                  <Button variant="solid" asChild tone={'magenta'}>
                     <Link href="/contact">Start a project</Link>
                   </Button>
                 </div>
-                {Array.isArray(doc?.data?.technology) &&
-                  doc.data.technology.length > 0 && (
-                    <div className="mt-4 flex flex-wrap items-center gap-3 text-xs opacity-70">
-                      {doc.data.technology.map((t: any, idx: number) => (
-                        <span key={idx} className="uppercase tracking-wide">
-                          {t?.name || t?.name}
-                        </span>
-                      ))}
-                    </div>
-                  )}
               </div>
             </article>
           );
