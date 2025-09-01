@@ -135,7 +135,10 @@ export default async function FeaturedProjects({
           const imgOrder = reverse ? 'md:order-2' : 'md:order-1';
           const textOrder = reverse ? 'md:order-1' : 'md:order-2';
 
+          // ✅ only pass a filled image to LaptopMock
+          // ✅ read image and only pass a filled image to LaptopMock
           const img = readImage(doc.data.meta_image);
+          const safeImg = prismic.isFilled.image(img) ? img : null;
           const title = readKeyText(doc.data.project_title);
           const excerpt = readRichText(doc.data.excerpt);
 
@@ -161,10 +164,7 @@ export default async function FeaturedProjects({
                 <div className={`md:transform-gpu ${imgBump}`}>
                   {/* Use transform-only bleed; do NOT use ml/mr calc here */}
                   <div className={`md:transform ${bleed}`}>
-                    <LaptopMock
-                      img={img ?? null}
-                      tech={techNames as string[]}
-                    />
+                    <LaptopMock img={safeImg} tech={techNames as string[]} />
                   </div>
                 </div>
               </div>
