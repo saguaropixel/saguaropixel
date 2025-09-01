@@ -1,0 +1,66 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Interior"
+						}
+					}
+				]
+			},
+			"faq_items": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"question",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Anim adipisicing ut consectetur dolore Lorem. Qui officia est aliquip pariatur. Minim reprehenderit mollit nulla id mollit Lorem cupidatat et sint."
+											}
+										}
+									]
+								}
+							],
+							[
+								"answer",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Incididunt in deserunt adipisicing laborum proident. Laboris voluptate veniam reprehenderit commodo eu proident duis incididunt culpa est elit."
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
+			},
+			"background_color": {
+				"key": "bedd9e2e-33cf-471a-b913-b045a1b14a1b",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
+			}
+		},
+		"items": []
+	}
+]

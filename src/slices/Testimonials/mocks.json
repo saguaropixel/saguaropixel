@@ -1,0 +1,78 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"items": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"testimonial",
+								{
+									"key": "d5ebcfa0-86d8-4e13-bcd9-aadf7777998e",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "DocumentLink",
+										"id": "mock_document_id"
+									}
+								}
+							]
+						]
+					}
+				]
+			},
+			"section_title": {
+				"__TYPE__": "FieldContent",
+				"value": "turn",
+				"type": "Text"
+			},
+			"background_color": {
+				"key": "1630f6ac-d9ea-446a-bc0d-1c6eaacc5833",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
+			}
+		},
+		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "auto",
+		"primary": {
+			"limit": {
+				"__TYPE__": "FieldContent",
+				"value": "23",
+				"type": "Number"
+			},
+			"section_title": {
+				"__TYPE__": "FieldContent",
+				"value": "contrast",
+				"type": "Text"
+			},
+			"order": {
+				"__TYPE__": "FieldContent",
+				"value": "Newest",
+				"type": "Select"
+			},
+			"background_color": {
+				"key": "110f631f-a30d-4203-93ae-f140f9f9c1b6",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]

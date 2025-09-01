@@ -174,6 +174,8 @@ export type BrandColorDocument<Lang extends string = string> =
   >;
 
 type HomepageDocumentDataSlicesSlice =
+  | FaqWithHeadingSlice
+  | TestimonialsSlice
   | FeaturedProjectsSlice
   | ServicesCarouselSlice
   | SplitContentSlice
@@ -755,6 +757,107 @@ export type TechnologyDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Content for Testimonial documents
+ */
+interface TestimonialDocumentData {
+  /**
+   * Quote field in *Testimonial*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.quote
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  quote: prismic.RichTextField;
+
+  /**
+   * Author Name field in *Testimonial*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.author_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  author_name: prismic.KeyTextField;
+
+  /**
+   * Avatar field in *Testimonial*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.avatar
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/link-to-media
+   */
+  avatar: prismic.LinkToMediaField<prismic.FieldState, never>;
+
+  /**
+   * Color field in *Testimonial*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.color
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  color: ContentRelationshipFieldWithData<
+    [{ id: "brand_color"; fields: ["name", "value"] }]
+  >;
+
+  /**
+   * Company field in *Testimonial*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.company
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  company: prismic.KeyTextField;
+
+  /**
+   * Rating field in *Testimonial*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.rating
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/number
+   */
+  rating: prismic.NumberField;
+
+  /**
+   * Featured field in *Testimonial*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: testimonial.featured
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  featured: prismic.BooleanField;
+}
+
+/**
+ * Testimonial document from Prismic
+ *
+ * - **API ID**: `testimonial`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type TestimonialDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<TestimonialDocumentData>,
+    "testimonial",
+    Lang
+  >;
+
 export type AllDocumentTypes =
   | AboutDocument
   | BrandColorDocument
@@ -765,7 +868,102 @@ export type AllDocumentTypes =
   | ServicePostDocument
   | ServicesDocument
   | SettingsDocument
-  | TechnologyDocument;
+  | TechnologyDocument
+  | TestimonialDocument;
+
+/**
+ * Item in *FaqWithHeading → Default → Primary → FAQ Items*
+ */
+export interface FaqWithHeadingSliceDefaultPrimaryFaqItemsItem {
+  /**
+   * Question field in *FaqWithHeading → Default → Primary → FAQ Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq_with_heading.default.primary.faq_items[].question
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  question: prismic.RichTextField;
+
+  /**
+   * Answer field in *FaqWithHeading → Default → Primary → FAQ Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq_with_heading.default.primary.faq_items[].answer
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  answer: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *FaqWithHeading → Default → Primary*
+ */
+export interface FaqWithHeadingSliceDefaultPrimary {
+  /**
+   * Background Color field in *FaqWithHeading → Default → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq_with_heading.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  background_color: ContentRelationshipFieldWithData<
+    [{ id: "brand_color"; fields: ["name", "value"] }]
+  >;
+
+  /**
+   * Heading field in *FaqWithHeading → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq_with_heading.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * FAQ Items field in *FaqWithHeading → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq_with_heading.default.primary.faq_items[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  faq_items: prismic.GroupField<
+    Simplify<FaqWithHeadingSliceDefaultPrimaryFaqItemsItem>
+  >;
+}
+
+/**
+ * Default variation for FaqWithHeading Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Displays a heading followed by a vertically stacked list of FAQs, each with question and optional answer.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type FaqWithHeadingSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<FaqWithHeadingSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *FaqWithHeading*
+ */
+type FaqWithHeadingSliceVariation = FaqWithHeadingSliceDefault;
+
+/**
+ * FaqWithHeading Shared Slice
+ *
+ * - **API ID**: `faq_with_heading`
+ * - **Description**: *None*
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type FaqWithHeadingSlice = prismic.SharedSlice<
+  "faq_with_heading",
+  FaqWithHeadingSliceVariation
+>;
 
 /**
  * Primary content in *FeaturedProjects → Default → Primary*
@@ -1938,6 +2136,169 @@ export type TestimonialWithAvatarSlice = prismic.SharedSlice<
   TestimonialWithAvatarSliceVariation
 >;
 
+/**
+ * Item in *Testimonials → Default → Primary → Items*
+ */
+export interface TestimonialsSliceDefaultPrimaryItemsItem {
+  /**
+   * Testimonial field in *Testimonials → Default → Primary → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.items[].testimonial
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  testimonial: ContentRelationshipFieldWithData<
+    [
+      {
+        id: "testimonial";
+        fields: [
+          "quote",
+          "author_name",
+          "avatar",
+          {
+            id: "color";
+            customtypes: [{ id: "brand_color"; fields: ["name", "value"] }];
+          },
+          "company",
+          "rating",
+          "featured",
+        ];
+      },
+    ]
+  >;
+}
+
+/**
+ * Primary content in *Testimonials → Default → Primary*
+ */
+export interface TestimonialsSliceDefaultPrimary {
+  /**
+   * Background Color field in *Testimonials → Default → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  background_color: ContentRelationshipFieldWithData<
+    [{ id: "brand_color"; fields: ["name", "value"] }]
+  >;
+
+  /**
+   * Section Title field in *Testimonials → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.section_title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  section_title: prismic.KeyTextField;
+
+  /**
+   * Items field in *Testimonials → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.items[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  items: prismic.GroupField<Simplify<TestimonialsSliceDefaultPrimaryItemsItem>>;
+}
+
+/**
+ * Default variation for Testimonials Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TestimonialsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TestimonialsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *Testimonials → Auto → Primary*
+ */
+export interface TestimonialsSliceAutoPrimary {
+  /**
+   * Background Color field in *Testimonials → Auto → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.auto.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  background_color: ContentRelationshipFieldWithData<
+    [{ id: "brand_color"; fields: ["name", "value"] }]
+  >;
+
+  /**
+   * Section Title field in *Testimonials → Auto → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.auto.primary.section_title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  section_title: prismic.KeyTextField;
+
+  /**
+   * Limit field in *Testimonials → Auto → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.auto.primary.limit
+   * - **Documentation**: https://prismic.io/docs/fields/number
+   */
+  limit: prismic.NumberField;
+
+  /**
+   * Order field in *Testimonials → Auto → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Newest
+   * - **API ID Path**: testimonials.auto.primary.order
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  order: prismic.SelectField<"Newest" | "Random", "filled">;
+}
+
+/**
+ * Auto variation for Testimonials Slice
+ *
+ * - **API ID**: `auto`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TestimonialsSliceAuto = prismic.SharedSliceVariation<
+  "auto",
+  Simplify<TestimonialsSliceAutoPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Testimonials*
+ */
+type TestimonialsSliceVariation =
+  | TestimonialsSliceDefault
+  | TestimonialsSliceAuto;
+
+/**
+ * Testimonials Shared Slice
+ *
+ * - **API ID**: `testimonials`
+ * - **Description**: Testimonials
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TestimonialsSlice = prismic.SharedSlice<
+  "testimonials",
+  TestimonialsSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -1986,7 +2347,14 @@ declare module "@prismicio/client" {
       SettingsDocumentDataNavigationItem,
       TechnologyDocument,
       TechnologyDocumentData,
+      TestimonialDocument,
+      TestimonialDocumentData,
       AllDocumentTypes,
+      FaqWithHeadingSlice,
+      FaqWithHeadingSliceDefaultPrimaryFaqItemsItem,
+      FaqWithHeadingSliceDefaultPrimary,
+      FaqWithHeadingSliceVariation,
+      FaqWithHeadingSliceDefault,
       FeaturedProjectsSlice,
       FeaturedProjectsSliceDefaultPrimary,
       FeaturedProjectsSliceVariation,
@@ -2045,6 +2413,13 @@ declare module "@prismicio/client" {
       TestimonialWithAvatarSliceDefaultPrimary,
       TestimonialWithAvatarSliceVariation,
       TestimonialWithAvatarSliceDefault,
+      TestimonialsSlice,
+      TestimonialsSliceDefaultPrimaryItemsItem,
+      TestimonialsSliceDefaultPrimary,
+      TestimonialsSliceAutoPrimary,
+      TestimonialsSliceVariation,
+      TestimonialsSliceDefault,
+      TestimonialsSliceAuto,
     };
   }
 }

@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 
 export const components = {
+  faq_with_heading: dynamic(() => import("./FaqWithHeading")),
   featured_projects: dynamic(() => import("./FeaturedProjects")),
   headline_cta_intro: dynamic(() => import("./HeadlineCtaIntro")),
   hero: dynamic(() => import("./Hero")),
@@ -16,4 +17,5 @@ export const components = {
   services_carousel: dynamic(() => import("./ServicesCarousel")),
   split_content: dynamic(() => import("./SplitContent")),
   testimonial_with_avatar: dynamic(() => import("./TestimonialWithAvatar")),
+  testimonials: dynamic(() => import("./Testimonials")),
 };

@@ -1,0 +1,139 @@
+{
+  "id": "testimonials",
+  "type": "SharedSlice",
+  "name": "Testimonials",
+  "description": "Testimonials",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "background_color": {
+          "type": "Link",
+          "config": {
+            "label": "Background Color",
+            "select": "document",
+            "repeat": false,
+            "customtypes": [
+              {
+                "id": "brand_color",
+                "fields": [
+                  "name",
+                  "value"
+                ]
+              }
+            ]
+          }
+        },
+        "section_title": {
+          "type": "Text",
+          "config": {
+            "label": "Section Title",
+            "placeholder": ""
+          }
+        },
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Items",
+            "repeat": true,
+            "fields": {
+              "testimonial": {
+                "type": "Link",
+                "config": {
+                  "label": "Testimonial",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    {
+                      "id": "testimonial",
+                      "fields": [
+                        "quote",
+                        "author_name",
+                        "avatar",
+                        {
+                          "id": "color",
+                          "customtypes": [
+                            {
+                              "id": "brand_color",
+                              "fields": [
+                                "name",
+                                "value"
+                              ]
+                            }
+                          ]
+                        },
+                        "company",
+                        "rating",
+                        "featured"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "auto",
+      "name": "Auto",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "background_color": {
+          "type": "Link",
+          "config": {
+            "label": "Background Color",
+            "select": "document",
+            "repeat": false,
+            "customtypes": [
+              {
+                "id": "brand_color",
+                "fields": [
+                  "name",
+                  "value"
+                ]
+              }
+            ]
+          }
+        },
+        "section_title": {
+          "type": "Text",
+          "config": {
+            "label": "Section Title",
+            "placeholder": ""
+          }
+        },
+        "limit": {
+          "type": "Number",
+          "config": {
+            "label": "Limit",
+            "placeholder": ""
+          }
+        },
+        "order": {
+          "type": "Select",
+          "config": {
+            "label": "Order",
+            "placeholder": "",
+            "options": [
+              "Newest",
+              "Random"
+            ],
+            "default_value": "Newest"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
