@@ -19,34 +19,31 @@ export type FaqWithHeadingProps =
 
 const FaqWithHeading: FC<FaqWithHeadingProps> = ({ slice }) => {
   const heading = slice.primary.heading;
+  const backgroundHex = isFilled.contentRelationship(
+    slice.primary.background_color
+  )
+    ? (slice.primary.background_color.data as any)?.value
+    : undefined;
 
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="relative py-16 md:py-24 bg-dark-brown-500 text-off-white-500"
+      className={`relative py-16 md:py-24 text-off-white-500`}
+      style={{ backgroundColor: backgroundHex ?? '#121212' }}
     >
       <div className="mx-auto max-w-[1536] px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
           {/* Heading */}
           <div className="md:col-span-1">
-            <Heading
-              as="h2"
-              size="sm"
-              underlineWidth={'55%'}
-              lineColor={'#F62972'}
-            >
+            <Heading as="h3" size="sm">
               <PrismicText field={heading} />
             </Heading>
           </div>
 
           {/* FAQ */}
           <div className="md:col-span-2">
-            <Accordion
-              type="single"
-              collapsible
-              className="w-full divide-y divide-neutral-800 rounded-md border border-neutral-800"
-            >
+            <Accordion type="single" collapsible className="w-full">
               {slice.primary.faq_items?.map((item, i) => {
                 const id = `faq-${i}`;
 
@@ -60,7 +57,7 @@ const FaqWithHeading: FC<FaqWithHeadingProps> = ({ slice }) => {
 
                 return (
                   <AccordionItem key={id} value={id} className="px-4 sm:px-6">
-                    <AccordionTrigger className="py-5 text-left text-base sm:text-lg font-medium hover:no-underline [&[data-state=open]>svg]:rotate-180 font-nunito">
+                    <AccordionTrigger className="py-5 text-left text-base sm:text-2xl font-medium hover:no-underline [&[data-state=open]>svg]:rotate-180 font-nunito">
                       {questionText}
                     </AccordionTrigger>
 

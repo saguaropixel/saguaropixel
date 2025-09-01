@@ -1,7 +1,6 @@
 // components/testimonials/TestimonialsCarousel.tsx
 'use client';
 
-// import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   CarouselContent,
@@ -9,6 +8,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
+import * as React from 'react';
 import { Testimonial, TestimonialCard } from './TestimonialCard';
 
 type Props = {
@@ -16,10 +17,20 @@ type Props = {
 };
 
 export default function TestimonialsCarousel({ items }: Props) {
+  // Persist a single plugin instance
+  const autoplay = React.useRef(
+    Autoplay({
+      delay: 5000, // 5s between slides
+      stopOnInteraction: true, // pause when user swipes/clicks
+      stopOnMouseEnter: true, // pause on hover (desktop)
+    })
+  );
   return (
     <Carousel
       opts={{ align: 'start', loop: true }}
-      // plugins={[Autoplay({ delay: 5000, stopOnInteraction: true })]}
+      plugins={[autoplay.current]}
+      onMouseEnter={autoplay.current.stop}
+      onMouseLeave={autoplay.current.reset}
       className="w-full"
       aria-label="Client testimonials"
     >

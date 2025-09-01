@@ -174,6 +174,7 @@ export type BrandColorDocument<Lang extends string = string> =
   >;
 
 type HomepageDocumentDataSlicesSlice =
+  | HeadlineCtaCenteredSlice
   | FaqWithHeadingSlice
   | TestimonialsSlice
   | FeaturedProjectsSlice
@@ -1045,6 +1046,83 @@ type FeaturedProjectsSliceVariation = FeaturedProjectsSliceDefault;
 export type FeaturedProjectsSlice = prismic.SharedSlice<
   "featured_projects",
   FeaturedProjectsSliceVariation
+>;
+
+/**
+ * Primary content in *HeadlineCtaCentered → Default → Primary*
+ */
+export interface HeadlineCtaCenteredSliceDefaultPrimary {
+  /**
+   * Background Color field in *HeadlineCtaCentered → Default → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: headline_cta_centered.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  background_color: ContentRelationshipFieldWithData<
+    [{ id: "brand_color"; fields: ["name", "value"] }]
+  >;
+
+  /**
+   * Headline field in *HeadlineCtaCentered → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: headline_cta_centered.default.primary.headline
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  headline: prismic.RichTextField;
+
+  /**
+   * Subtitle field in *HeadlineCtaCentered → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: headline_cta_centered.default.primary.subtitle
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  subtitle: prismic.RichTextField;
+
+  /**
+   * Call To Action field in *HeadlineCtaCentered → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: headline_cta_centered.default.primary.cta
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  cta: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Default variation for HeadlineCtaCentered Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Standard layout with headline, styled subtitle, and a single centered call-to-action.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeadlineCtaCenteredSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<HeadlineCtaCenteredSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *HeadlineCtaCentered*
+ */
+type HeadlineCtaCenteredSliceVariation = HeadlineCtaCenteredSliceDefault;
+
+/**
+ * HeadlineCtaCentered Shared Slice
+ *
+ * - **API ID**: `headline_cta_centered`
+ * - **Description**: *None*
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeadlineCtaCenteredSlice = prismic.SharedSlice<
+  "headline_cta_centered",
+  HeadlineCtaCenteredSliceVariation
 >;
 
 /**
@@ -2359,6 +2437,10 @@ declare module "@prismicio/client" {
       FeaturedProjectsSliceDefaultPrimary,
       FeaturedProjectsSliceVariation,
       FeaturedProjectsSliceDefault,
+      HeadlineCtaCenteredSlice,
+      HeadlineCtaCenteredSliceDefaultPrimary,
+      HeadlineCtaCenteredSliceVariation,
+      HeadlineCtaCenteredSliceDefault,
       HeadlineCtaIntroSlice,
       HeadlineCtaIntroSliceDefaultPrimary,
       HeadlineCtaIntroSliceVariation,

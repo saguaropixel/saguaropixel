@@ -1,63 +1,69 @@
-import clsx from 'clsx';
+import { cn } from '@/lib/utils';
 import * as React from 'react';
+
+type HeadingSize =
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | 'd1'
+  | 'd2'
+  | 'd3'
+  | 'd4'
+  | 'd5'
+  | 'd6';
 
 type HeadingProps = {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  /** token sizes: xl → h-xxl, lg → h-xl, md → h1, sm → h2, xs → h3 (fallback h4) */
-  size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs';
-  /** force uppercase (tokens have headings case-normal; buttons are uppercase) */
+  /** xs→h3, sm→h2, md→h1, lg→h-xl, xl→h-xxl; d1–d6 are big, fluid display sizes */
+  size?: HeadingSize;
   uppercase?: boolean;
-  underlineWidth?: string | number;
-  lineColor?: string;
+  /** tighter line-height for hero headings */
+  tight?: boolean;
   className?: string;
+  style?: React.CSSProperties;
   children: React.ReactNode;
+};
+
+// token sizes + fluid display scales
+const sizeClassMap: Record<HeadingSize, string> = {
+  xs: 'text-h3',
+  sm: 'text-h2',
+  md: 'text-h1',
+  lg: 'text-h-xl',
+  xl: 'text-h-xxl',
+  // Display scales (approx phone → xl desktop max)
+  d1: 'text-[clamp(2.5rem,6vw,4rem)]', // ~40 → 64
+  d2: 'text-[clamp(3.5rem,9vw,7rem)]', // ~56 → 112
+  d3: 'text-[clamp(5rem,12vw,12.5rem)]', // ~80 → 200
+  d4: 'text-[clamp(6.5rem,15vw,16rem)]', // ~104 → 256
+  d5: 'text-[clamp(8rem,20vw,20rem)]', // ~128 → 320
+  d6: 'text-[clamp(10rem,24vw,24rem)]', // ~160 → 384
 };
 
 export function Heading({
   as: Comp = 'h1',
   size = 'lg',
   uppercase = false,
-  underlineWidth = '80%',
-  lineColor = '#E7A917',
+  tight = false,
   className,
+  style,
   children,
 }: HeadingProps) {
-  const sizeClass =
-    size === 'xl'
-      ? 'text-h-xxl'
-      : size === 'lg'
-        ? 'text-h-xl'
-        : size === 'md'
-          ? 'text-h1'
-          : size === 'sm'
-            ? 'text-h2'
-            : 'text-h3'; // xs
+  const sizeClass = sizeClassMap[size] ?? sizeClassMap.lg;
 
   return (
     <Comp
-      className={clsx(
-        'font-heading relative inline-block', // Tiny5
-        sizeClass, // token font-size + lh + tracking + weight
+      className={cn(
+        sizeClass,
         uppercase && 'uppercase',
+        tight && 'leading-[0.9]',
         className
       )}
-      style={
-        {
-          ['--heading-underline' as string]: lineColor,
-          ['--underline-width' as string]:
-            typeof underlineWidth === 'number'
-              ? `${underlineWidth}px`
-              : underlineWidth,
-        } as React.CSSProperties
-      }
+      style={style}
     >
       {children}
-      {/* underline bar starting from the left of the text */}
-      <span
-        aria-hidden="true"
-        className="absolute left-0 bottom-0 h-1.5 md:h-1.75 bg-[var(--heading-underline)]"
-        style={{ width: 'var(--underline-width)' }}
-      />
     </Comp>
   );
 }

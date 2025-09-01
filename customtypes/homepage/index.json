@@ -11,6 +11,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "headline_cta_centered": {
+              "type": "SharedSlice"
+            },
             "faq_with_heading": {
               "type": "SharedSlice"
             },

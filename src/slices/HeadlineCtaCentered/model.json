@@ -1,0 +1,58 @@
+{
+  "type": "SharedSlice",
+  "id": "headline_cta_centered",
+  "name": "HeadlineCtaCentered",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "description": "Standard layout with headline, styled subtitle, and a single centered call-to-action.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "background_color": {
+          "type": "Link",
+          "config": {
+            "label": "Background Color",
+            "select": "document",
+            "repeat": false,
+            "customtypes": [
+              {
+                "id": "brand_color",
+                "fields": [
+                  "name",
+                  "value"
+                ]
+              }
+            ]
+          }
+        },
+        "headline": {
+          "type": "StructuredText",
+          "config": {
+            "single": "heading1",
+            "label": "Headline"
+          }
+        },
+        "subtitle": {
+          "type": "StructuredText",
+          "config": {
+            "single": "heading2",
+            "label": "Subtitle"
+          }
+        },
+        "cta": {
+          "type": "Link",
+          "config": {
+            "label": "Call To Action",
+            "allowText": true,
+            "repeat": false,
+            "select": null
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
