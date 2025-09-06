@@ -1,4 +1,3 @@
-// src/slices/HeroPixelArt/index.tsx
 'use client';
 
 import { Heading } from '@/components/Heading';
@@ -18,45 +17,21 @@ const HeroPixelArt: FC<HeroPixelArtProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="
-        relative w-full overflow-hidden py-24 bg-dark-brown-500 text-brand-black"
+      className="relative w-full overflow-hidden bg-dark-brown-500 py-24 text-brand-black"
     >
-      {/* Content container */}
-      <div className="relative z-10 mx-auto grid h-full max-w-[1400px] grid-rows-[1fr_auto] px-6 py-10 md:px-10 lg:px-16">
-        {/* Headline block */}
-        <div className="self-center">
-          <Heading
-            as="h1"
-            size="xl"
-            className="
-              block font-heading uppercase text-magenta-500
-              leading-[0.9] tracking-tight
-              text-[clamp(44px,8vw,140px)]
-            "
-          >
-            {first_line}
-          </Heading>
+      {/* Headline block */}
+      <div className="full-bleed relative z-10">
+        <MarqueeLine text={first_line} />
+        <MarqueeLine text={second_line} reverse className="mt-2 md:mt-4" />
+      </div>
 
-          <Heading
-            as="h1"
-            size="xl"
-            className="
-              mt-4 block font-heading uppercase text-magenta-500
-              leading-[0.9] tracking-tight
-              text-[clamp(44px,8vw,140px)]
-            "
-          >
-            {second_line}
-          </Heading>
-        </div>
-
+      <div className="relative z-20 mx-auto max-w-[1400px] px-6 md:px-10 lg:px-16">
         {/* CTAs */}
-        <div className="mt-8 flex flex-wrap gap-4 self-start">
+        <div className="mt-10 flex flex-wrap gap-4">
           {primary_action?.link_type && (
             <Button variant="solid" tone="yellow" asChild>
               <PrismicNextLink field={primary_action}>
-                {/* If you store a label on the link’s text, use it; fallback below */}
-                {((primary_action as any).text as string) || 'VIEW MY WORK'}
+                {(primary_action as any).text || 'VIEW MY WORK'}
               </PrismicNextLink>
             </Button>
           )}
@@ -64,8 +39,7 @@ const HeroPixelArt: FC<HeroPixelArtProps> = ({ slice }) => {
           {secondary_action?.link_type && (
             <Button variant="solid" tone="magenta" asChild>
               <PrismicNextLink field={secondary_action}>
-                {((secondary_action as any).text as string) ||
-                  'START A PROJECT'}
+                {(secondary_action as any).text || 'START A PROJECT'}
               </PrismicNextLink>
             </Button>
           )}
@@ -77,18 +51,10 @@ const HeroPixelArt: FC<HeroPixelArtProps> = ({ slice }) => {
         <PrismicNextImage
           field={graphic}
           priority
-          className="
-            pointer-events-none select-none
-            absolute bottom-0 right-0 z-0 h-[90%] w-auto
-            translate-y-[6%] sm:translate-y-[4%]
-          "
-          // Decorative only; don’t announce to screen readers
+          className="pointer-events-none absolute bottom-0 right-0 z-0 h-[90%] w-auto translate-y-[6%] sm:translate-y-[4%] select-none"
           alt=""
         />
       )}
-
-      {/* Pixel confetti */}
-      {/* <PixelConfetti /> */}
     </section>
   );
 };
@@ -96,45 +62,60 @@ const HeroPixelArt: FC<HeroPixelArtProps> = ({ slice }) => {
 export default HeroPixelArt;
 
 /* ———————————————————————————————— */
-/* Tiny pixel confetti sprinkled around */
+/* Marquee Component for each line */
 /* ———————————————————————————————— */
-const PixelConfetti = () => {
-  // A handful of absolutely-positioned squares (no layout thrash)
-  const dots = [
-    'top-[12%] left-[9%]',
-    'top-[22%] left-[40%]',
-    'top-[30%] left-[63%]',
-    'top-[48%] left-[28%]',
-    'top-[58%] left-[52%]',
-    'top-[72%] left-[36%]',
-    'top-[78%] left-[18%]',
-    'top-[20%] left-[84%]',
-    'top-[66%] left-[72%]',
-  ];
+function MarqueeLine({
+  text,
+  reverse = false,
+  className = '',
+}: {
+  text: any;
+  reverse?: boolean;
+  className?: string;
+}) {
+  if (!text) return null;
 
-  const colors = [
-    'bg-cyan-400',
-    'bg-magenta-500',
-    'bg-yellow-400',
-    'bg-white',
-    'bg-cyan-500',
-  ];
-
-  return (
-    <div aria-hidden className="absolute inset-0 z-0">
-      {dots.map((pos, i) => (
-        <span
+  // One lane (no wrapping), duplicated once for seamless scroll.
+  const Lane = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
+    <div
+      aria-hidden={ariaHidden}
+      className="
+        flex shrink-0 items-baseline whitespace-nowrap
+        gap-[clamp(2rem,4vw,3rem)] pr-[clamp(2rem,4vw,3rem)]
+      "
+    >
+      {Array.from({ length: 6 }).map((_, i) => (
+        <Heading
           key={i}
-          className={`
-            absolute ${pos}
-            block h-2 w-2 md:h-5 md:w-5
-            ${colors[i % colors.length]}
-            animate-bounce
-            [animation-duration:${1200 + (i % 5) * 150}ms]
-            [animation-delay:${(i % 7) * 90}ms]
-          `}
-        />
+          as="h1"
+          size="d3"
+          className="
+            inline-block whitespace-nowrap
+            font-heading uppercase text-magenta-500
+            leading-none
+          "
+        >
+          {text}
+        </Heading>
       ))}
     </div>
   );
-};
+
+  // Nice slow speeds — second line a bit slower for parallax feel
+  const duration = reverse ? '90s' : '75s';
+
+  return (
+    <div className={`relative overflow-hidden ${className}`}>
+      <div
+        className={[
+          'flex w-max will-change-transform',
+          reverse ? 'animate-marquee-reverse' : 'animate-marquee',
+        ].join(' ')}
+        style={{ animationDuration: duration }}
+      >
+        <Lane />
+        <Lane ariaHidden />
+      </div>
+    </div>
+  );
+}

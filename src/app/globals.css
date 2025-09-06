@@ -110,6 +110,49 @@
   }
 }
 
+/* full-bleed helper so the text spans edge-to-edge */
+.full-bleed {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+}
+
+/* two-lane marquee */
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@keyframes marquee-reverse {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+.animate-marquee {
+  animation: marquee linear infinite;
+}
+.animate-marquee-reverse {
+  animation: marquee-reverse linear infinite;
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation-duration: 0.001s;
+    animation-iteration-count: 1;
+  }
+}
+
 /* @layer base {
   h1 {
     @apply text-h1 font-heading;

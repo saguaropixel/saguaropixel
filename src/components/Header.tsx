@@ -1,105 +1,119 @@
 import { createClient } from '@/prismicio';
 import { PrismicNextLink } from '@prismicio/next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from './ui/button';
 
 export async function Header() {
   const client = createClient();
   const settings = await client.getSingle('settings');
+  // above the return (inside Header)
+  const navKey = (item: any, i: number, scope: 'desk' | 'mob') =>
+    `${scope}:${item?.link?.uid ?? item?.link?.url ?? item?.link?.text ?? 'nav'}:${i}`;
 
   return (
-    <header className="header absolute left-0 right-0 top-0 z-50 ~h-32/48 ~px-4/6 ~py-4/6 hd:h-32">
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-[auto,auto] items-center gap-6 md:grid-cols-[1fr,auto,1fr]">
-        <Link href="/" className="justify-self-start">
-          Logo Goes Here
+    <header className="sticky left-0 right-0 top-0 z-50 border-b border-neutral-800 bg-[#1d1b1a]">
+      <div className="mx-auto grid w-full max-w-8xl grid-cols-[auto,1fr,auto] items-center gap-4 px-4 py-4 md:py-5">
+        {/* Logo / Brand */}
+        <Link
+          href="/"
+          className="inline-flex items-center gap-3 text-white"
+          aria-label="Saguaro Pixels – Home"
+        >
+          {/* Swap for your logo image if you have one in Prismic */}
+          {settings.data.logo?.url && (
+            <Image
+              src={settings.data.logo?.url}
+              alt={settings.data.logo?.alt || 'Logo'}
+              width={434}
+              height={103}
+              className="h-16 w-30"
+              priority
+            />
+          )}
         </Link>
 
-        {/* Mobile Navigation Toggle and Menu */}
-        <div className="relative md:hidden justify-self-end z-50">
-          <input type="checkbox" id="nav-toggle" className="hidden peer" />
-          <label
-            htmlFor="nav-toggle"
-            className="block cursor-pointer w-8 h-8 relative z-50"
-            aria-label="Toggle navigation"
-          >
-            <span className="absolute h-0.5 w-full bg-black top-1 transition-transform duration-300 ease-in-out peer-checked:rotate-45 peer-checked:translate-y-2.5" />
-            <span className="absolute h-0.5 w-full bg-black top-3.5 transition-opacity duration-300 ease-in-out peer-checked:opacity-0" />
-            <span className="absolute h-0.5 w-full bg-black top-6 transition-transform duration-300 ease-in-out peer-checked:-rotate-45 peer-checked:-translate-y-2.5" />
-          </label>
-
-          {/* Off-canvas Mobile Navigation */}
-          <div className="fixed inset-y-0 right-0 w-64 bg-brand-white shadow-lg transition-transform duration-300 ease-in-out transform translate-x-full peer-checked:translate-x-0 md:hidden z-10">
-            <nav className="h-full flex flex-col pt-24 px-6">
-              <ul className="flex flex-col gap-6">
-                {settings.data.navigation.map((item) => (
-                  <li
-                    key={
-                      item.link?.text ?? `${item.link ?? ''}-${item.link ?? ''}`
-                    }
-                  >
-                    <PrismicNextLink
-                      field={item.link}
-                      className="~text-2xl/3xl hover:text-gray-600 lowercase"
-                    />
-                  </li>
-                ))}
-              </ul>
-
-              {/* Mobile CTA (use plain link) */}
-              <div className="mt-6">
-                <PrismicNextLink
-                  href="/contact"
-                  aria-label="Start a project"
-                  className={`
-                    button-cutout group mx-4 inline-flex items-center
-                    rounded-full px-8 gap-3 text-lg ~py-2.5/3
-                    bg-gradient-to-b from-25% to-75% bg-[length:100%_400%]
-                    transition-[filter,background-position] duration-300 hover:bg-bottom
-                    from-brand-red to-brand-white text-brand-white hover:text-brand-black
-                  `}
-                >
-                  Start A Project
-                </PrismicNextLink>
-              </div>
-            </nav>
-          </div>
-
-          {/* Overlay */}
-          <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ease-in-out opacity-0 peer-checked:opacity-100 pointer-events-none peer-checked:pointer-events-auto md:hidden" />
-        </div>
-
-        {/* Desktop Navigation */}
+        {/* Desktop Nav */}
         <nav
           aria-label="Main"
-          className="hidden md:block col-span-full row-start-2 md:col-span-1 md:col-start-2 md:row-start-1 bg-off-white-500 rounded-full py-3 px-6"
+          className="hidden md:flex items-center justify-center"
         >
-          <ul className="flex flex-wrap items-center justify-center gap-8">
-            {settings.data.navigation.map((item) => (
-              <li
-                key={item.link?.text ?? `${item.link ?? ''}-${item.link ?? ''}`}
-              >
-                <PrismicNextLink field={item.link} className="~text-lg/xl" />
+          <ul className="flex items-center gap-10">
+            {settings.data.navigation.map((item: any, i: number) => (
+              <li key={navKey(item, i, 'desk')}>
+                <PrismicNextLink
+                  field={item.link}
+                  className="text-[15px] font-medium text-white/80 transition-colors hover:text-white"
+                />
               </li>
             ))}
           </ul>
         </nav>
 
-        {/* Desktop CTA (plain link, same styling as before) */}
-        <div className="hidden md:block justify-self-end">
-          <Button value="destructive">Click Me</Button>
-          {/* <PrismicNextLink
-            href="/contact"
-            aria-label="Start a project"
-            className={`
-              button-cutout group inline-flex items-center
-              rounded-full px-8 gap-3 text-lg ~py-2.5/3
-              bg-gradient-to-b from-25% to-75% bg-[length:100%_400%]
-              transition-[filter,background-position] duration-300 hover:bg-bottom
-              from-brand-red to-brand-white text-brand-white hover:text-brand-black
-            `}
+        {/* Desktop CTA */}
+        <div className="hidden md:flex justify-end">
+          <Button
+            variant={'solid'}
+            tone={'magenta'}
+            asChild
+            className="tracking-wider text-white hover:bg-[#ff4a96]"
           >
-            Start A Project
-          </PrismicNextLink> */}
+            <Link href="/contact">Start a Project</Link>
+          </Button>
+        </div>
+
+        {/* Mobile hamburger + drawer */}
+        <div className="md:hidden justify-self-end">
+          <input id="nav-toggle" type="checkbox" className="peer hidden" />
+          <label
+            htmlFor="nav-toggle"
+            className="relative block h-8 w-8 cursor-pointer"
+            aria-label="Toggle navigation"
+          >
+            <span className="absolute left-0 top-1 h-0.5 w-8 bg-white transition-transform duration-300 peer-checked:translate-y-3 peer-checked:rotate-45" />
+            <span className="absolute left-0 top-3.5 h-0.5 w-8 bg-white transition-opacity duration-300 peer-checked:opacity-0" />
+            <span className="absolute left-0 top-6 h-0.5 w-8 bg-white transition-transform duration-300 peer-checked:-translate-y-3 peer-checked:-rotate-45" />
+          </label>
+
+          {/* overlay */}
+          <div className="pointer-events-none fixed inset-0 z-40 bg-black/50 opacity-0 transition-opacity duration-300 peer-checked:pointer-events-auto peer-checked:opacity-100" />
+          {/* drawer */}
+          <div className="fixed inset-y-0 right-0 z-50 w-72 translate-x-full bg-[#1d1b1a] p-6 transition-transform duration-300 peer-checked:translate-x-0">
+            {/* Close button */}
+            <div className="flex justify-end">
+              <label
+                htmlFor="nav-toggle"
+                className="cursor-pointer text-white text-2xl leading-none"
+                aria-label="Close navigation"
+              >
+                ✕
+              </label>
+            </div>
+
+            <nav className="mt-6">
+              <ul className="flex flex-col gap-5">
+                {settings.data.navigation.map((item: any, i: number) => (
+                  <li key={navKey(item, i, 'mob')}>
+                    <PrismicNextLink
+                      field={item.link}
+                      className="block text-lg font-medium text-white/90"
+                    />
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-8">
+                <Button
+                  variant={'solid'}
+                  tone={'magenta'}
+                  asChild
+                  className="tracking-wider text-white hover:bg-[#ff4a96]"
+                >
+                  <Link href="/contact">Start a Project</Link>
+                </Button>
+              </div>
+            </nav>
+          </div>
         </div>
       </div>
     </header>

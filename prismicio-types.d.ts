@@ -789,6 +789,17 @@ export interface SettingsDocumentDataNavigationItem {
  */
 interface SettingsDocumentData {
   /**
+   * Logo field in *Settings*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.logo
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  logo: prismic.ImageField<never>;
+
+  /**
    * Site Title field in *Settings*
    *
    * - **Field Type**: Text
