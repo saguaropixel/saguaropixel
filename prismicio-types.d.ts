@@ -173,6 +173,140 @@ export type BrandColorDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Item in *Footer → Nav Links*
+ */
+export interface FooterDocumentDataNavLinksItem {
+  /**
+   * Label field in *Footer → Nav Links*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer.nav_links[].label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Link field in *Footer → Nav Links*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer.nav_links[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Item in *Footer → Social*
+ */
+export interface FooterDocumentDataSocialItem {
+  /**
+   * Service field in *Footer → Social*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer.social[].service
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  service: prismic.SelectField<
+    | "Twitter"
+    | "Instagram"
+    | "GitHub"
+    | "LinkedIn"
+    | "Facebook"
+    | "TikTok"
+    | "YouTube"
+  >;
+
+  /**
+   * URL field in *Footer → Social*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer.social[].url
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  url: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Content for Footer documents
+ */
+interface FooterDocumentData {
+  /**
+   * Logo field in *Footer*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer.logo
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  logo: prismic.ImageField<never>;
+
+  /**
+   * Brand Text field in *Footer*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer.brand_text
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  brand_text: prismic.KeyTextField;
+
+  /**
+   * Nav Links field in *Footer*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer.nav_links[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  nav_links: prismic.GroupField<Simplify<FooterDocumentDataNavLinksItem>>;
+
+  /**
+   * Legal Rich Text field in *Footer*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer.legal_rich_text
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  legal_rich_text: prismic.RichTextField;
+
+  /**
+   * Social field in *Footer*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer.social[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  social: prismic.GroupField<Simplify<FooterDocumentDataSocialItem>>;
+}
+
+/**
+ * Footer document from Prismic
+ *
+ * - **API ID**: `footer`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type FooterDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<FooterDocumentData>,
+    "footer",
+    Lang
+  >;
+
 type HomepageDocumentDataSlicesSlice =
   | HeadlineCtaCenteredSlice
   | FaqWithHeadingSlice
@@ -862,6 +996,7 @@ export type TestimonialDocument<Lang extends string = string> =
 export type AllDocumentTypes =
   | AboutDocument
   | BrandColorDocument
+  | FooterDocument
   | HomepageDocument
   | ProjectPostDocument
   | ProjectsDocument
@@ -2403,6 +2538,10 @@ declare module "@prismicio/client" {
       AboutDocumentDataSlicesSlice,
       BrandColorDocument,
       BrandColorDocumentData,
+      FooterDocument,
+      FooterDocumentData,
+      FooterDocumentDataNavLinksItem,
+      FooterDocumentDataSocialItem,
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,

@@ -1,4 +1,6 @@
+import Footer from '@/components/Footer';
 import { Header } from '@/components/Header';
+import { createClient } from '@/prismicio';
 import { Nunito_Sans, Tiny5 } from 'next/font/google';
 import './globals.css';
 
@@ -13,13 +15,18 @@ const nunitoSans = Nunito_Sans({
   variable: '--font-nunito-sans',
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const client = createClient();
+  const footer = await client.getSingle('footer', {
+    fetchOptions: { next: { tags: ['footer'] } },
+  });
+
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <body
         className={`${tiny5.variable} ${nunitoSans.variable} antialiased font-nunito font-medium text-zinc-800`}
       >
@@ -27,6 +34,7 @@ export default function RootLayout({
           <Header />
           {/* <Providers> */}
           {children}
+          <Footer data={footer} />
           {/* </Providers> */}
         </main>
       </body>
