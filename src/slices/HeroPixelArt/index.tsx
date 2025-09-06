@@ -15,7 +15,7 @@ const HeroPixelArt: FC<HeroPixelArtProps> = ({ slice }) => {
     slice.primary;
 
   return (
-    <section className="relative w-full overflow-hidden bg-dark-brown-500 py-20 md:py-24">
+    <section className="relative w-full overflow-hidden bg-dark-brown-500 py-20 md:py-36">
       {/* Top layer: first line */}
       <div className="full-bleed pointer-events-none relative z-30">
         <MarqueeLine text={first_line} />
