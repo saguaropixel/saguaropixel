@@ -10,7 +10,14 @@
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "choices": {}
+          "choices": {
+            "projects_grid": {
+              "type": "SharedSlice"
+            },
+            "headline_cta_centered": {
+              "type": "SharedSlice"
+            }
+          }
         }
       }
     },

@@ -1,0 +1,69 @@
+{
+  "id": "projects_grid",
+  "type": "SharedSlice",
+  "name": "ProjectsGrid",
+  "description": "ProjectsGrid",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "mode": {
+          "type": "Select",
+          "config": {
+            "label": "Mode",
+            "placeholder": "",
+            "options": [
+              "dynamic",
+              "curated"
+            ]
+          }
+        },
+        "page_size": {
+          "type": "Number",
+          "config": {
+            "label": "Page Size",
+            "placeholder": ""
+          }
+        },
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Items",
+            "repeat": true,
+            "fields": {
+              "curated_projects": {
+                "type": "Link",
+                "config": {
+                  "label": "Curated Projects",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    {
+                      "id": "project_post",
+                      "fields": [
+                        "project_title",
+                        "excerpt",
+                        "project_date",
+                        "client_name",
+                        "featured",
+                        "meta_title",
+                        "meta_description",
+                        "meta_image"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

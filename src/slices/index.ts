@@ -15,6 +15,7 @@ export const components = {
   people: dynamic(() => import("./People")),
   process_with_image_steps: dynamic(() => import("./ProcessWithImageSteps")),
   project_summary_showcase: dynamic(() => import("./ProjectSummaryShowcase")),
+  projects_grid: dynamic(() => import("./ProjectsGrid")),
   services_carousel: dynamic(() => import("./ServicesCarousel")),
   split_content: dynamic(() => import("./SplitContent")),
   testimonial_with_avatar: dynamic(() => import("./TestimonialWithAvatar")),

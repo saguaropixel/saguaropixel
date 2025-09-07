@@ -507,7 +507,9 @@ export type ProjectPostDocument<Lang extends string = string> =
     Lang
   >;
 
-type ProjectsDocumentDataSlicesSlice = never;
+type ProjectsDocumentDataSlicesSlice =
+  | ProjectsGridSlice
+  | HeadlineCtaCenteredSlice;
 
 /**
  * Content for Projects documents
@@ -2106,6 +2108,102 @@ export type ProjectSummaryShowcaseSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *ProjectsGrid → Default → Primary → Items*
+ */
+export interface ProjectsGridSliceDefaultPrimaryItemsItem {
+  /**
+   * Curated Projects field in *ProjectsGrid → Default → Primary → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projects_grid.default.primary.items[].curated_projects
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  curated_projects: ContentRelationshipFieldWithData<
+    [
+      {
+        id: "project_post";
+        fields: [
+          "project_title",
+          "excerpt",
+          "project_date",
+          "client_name",
+          "featured",
+          "meta_title",
+          "meta_description",
+          "meta_image",
+        ];
+      },
+    ]
+  >;
+}
+
+/**
+ * Primary content in *ProjectsGrid → Default → Primary*
+ */
+export interface ProjectsGridSliceDefaultPrimary {
+  /**
+   * Mode field in *ProjectsGrid → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projects_grid.default.primary.mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  mode: prismic.SelectField<"dynamic" | "curated">;
+
+  /**
+   * Page Size field in *ProjectsGrid → Default → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projects_grid.default.primary.page_size
+   * - **Documentation**: https://prismic.io/docs/fields/number
+   */
+  page_size: prismic.NumberField;
+
+  /**
+   * Items field in *ProjectsGrid → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projects_grid.default.primary.items[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  items: prismic.GroupField<Simplify<ProjectsGridSliceDefaultPrimaryItemsItem>>;
+}
+
+/**
+ * Default variation for ProjectsGrid Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ProjectsGridSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ProjectsGridSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ProjectsGrid*
+ */
+type ProjectsGridSliceVariation = ProjectsGridSliceDefault;
+
+/**
+ * ProjectsGrid Shared Slice
+ *
+ * - **API ID**: `projects_grid`
+ * - **Description**: ProjectsGrid
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ProjectsGridSlice = prismic.SharedSlice<
+  "projects_grid",
+  ProjectsGridSliceVariation
+>;
+
+/**
  * Item in *ServicesCarousel → Default → Primary → Items*
  */
 export interface ServicesCarouselSliceDefaultPrimaryItemsItem {
@@ -2632,6 +2730,11 @@ declare module "@prismicio/client" {
       ProjectSummaryShowcaseSliceDefaultWithFeaturesImagePrimary,
       ProjectSummaryShowcaseSliceVariation,
       ProjectSummaryShowcaseSliceDefaultWithFeaturesImage,
+      ProjectsGridSlice,
+      ProjectsGridSliceDefaultPrimaryItemsItem,
+      ProjectsGridSliceDefaultPrimary,
+      ProjectsGridSliceVariation,
+      ProjectsGridSliceDefault,
       ServicesCarouselSlice,
       ServicesCarouselSliceDefaultPrimaryItemsItem,
       ServicesCarouselSliceDefaultPrimary,

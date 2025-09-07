@@ -1,106 +1,42 @@
 // app/projects/page.tsx
-import { Heading } from '@/components/Heading';
-import { ProjectCard } from '@/components/ProjectCard';
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from '@/components/ui/pagination';
-import { getProjects } from '@/lib/projects';
+import { createClient } from '@/prismicio';
+import { components } from '@/slices';
+import { asImageSrc } from '@prismicio/client';
+import { SliceZone } from '@prismicio/react';
+import { type Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
-export const revalidate = 60; // safety net; webhook will do the heavy lifting
+export const revalidate = 60;
 
-type SearchParams = {
-  page?: string | string[];
-};
+type SearchParams = { page?: string | string[] };
 
-export default async function ProjectsPage({
+export default async function Page({
   searchParams,
 }: {
-  // Next.js 15 passes searchParams as a Promise
   searchParams: Promise<SearchParams>;
 }) {
   const params = await searchParams;
-  const rawPage = params?.page;
-  const page = Number(Array.isArray(rawPage) ? rawPage[0] : (rawPage ?? '1'));
+  const raw = params?.page;
+  const page = Number(Array.isArray(raw) ? raw[0] : (raw ?? '1'));
 
-  const {
-    results,
-    page: current,
-    total_pages,
-  } = await getProjects({
-    page,
-    pageSize: 9,
-  });
+  const client = createClient();
+  const doc = await client.getSingle('projects').catch(() => notFound());
 
   return (
-    <main className="container mx-auto px-4 py-20">
-      <Heading as="h1" size="d2" className="text-center my-20">
-        PROJECTS
-      </Heading>
-      {/* <h1 className="font-[var(--font-tiny5)] text-4xl md:text-6xl tracking-tight mb-10">
-        Projects
-      </h1> */}
-
-      <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-        {results.map((doc) => (
-          <ProjectCard key={doc.id} doc={doc} />
-        ))}
-      </div>
-
-      {/* Shadcn Pagination */}
-      <div className="mt-12 flex justify-center">
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious
-                href={`/projects?page=${Math.max(1, current - 1)}`}
-                aria-disabled={current <= 1}
-              />
-            </PaginationItem>
-
-            {/* Page numbers */}
-            {Array.from({ length: total_pages }, (_, i) => i + 1).map((p) => {
-              // limit numbers (show first, last, current, +/- 1, with ellipsis)
-              if (
-                p === 1 ||
-                p === total_pages ||
-                (p >= current - 1 && p <= current + 1)
-              ) {
-                return (
-                  <PaginationItem key={p}>
-                    <PaginationLink
-                      href={`/projects?page=${p}`}
-                      isActive={p === current}
-                    >
-                      {p}
-                    </PaginationLink>
-                  </PaginationItem>
-                );
-              }
-              if (p === current - 2 || p === current + 2) {
-                return (
-                  <PaginationItem key={p}>
-                    <PaginationEllipsis />
-                  </PaginationItem>
-                );
-              }
-              return null;
-            })}
-
-            <PaginationItem>
-              <PaginationNext
-                href={`/projects?page=${Math.min(total_pages, current + 1)}`}
-                aria-disabled={current >= total_pages}
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
-      </div>
-    </main>
+    <SliceZone
+      slices={doc.data.slices}
+      components={components}
+      context={{ projects: { page, pageSize: 9, basePath: '/projects' } }}
+    />
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const client = createClient();
+  const page = await client.getSingle('projects').catch(() => notFound());
+  return {
+    title: page.data.meta_title,
+    description: page.data.meta_description,
+    openGraph: { images: [{ url: asImageSrc(page.data.meta_image) ?? '' }] },
+  };
 }

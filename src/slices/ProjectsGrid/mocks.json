@@ -1,0 +1,40 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"mode": {
+				"__TYPE__": "FieldContent",
+				"value": "dynamic",
+				"type": "Select"
+			},
+			"page_size": {
+				"__TYPE__": "FieldContent",
+				"value": "21",
+				"type": "Number"
+			},
+			"items": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"curated_projects",
+								{
+									"__TYPE__": "LinkContent",
+									"key": "39987e32-5083-48b2-a407-eb3929205add",
+									"value": {
+										"__TYPE__": "DocumentLink",
+										"id": "mock_document_id"
+									}
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]
