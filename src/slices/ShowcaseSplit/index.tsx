@@ -7,8 +7,7 @@ import { FC } from 'react';
 // Remove the import (and the usage) if you don't use it.
 // import LaptopMock from "@/components/LaptopMock";
 
-export type ShowcaseSplitProps =
-  SliceComponentProps<Content.ShowcaseSplitSlice>;
+export type ShowcaseSplitProps = SliceComponentProps<Content.ShowcaseSplit>;
 
 const ShowcaseSplit: FC<ShowcaseSplitProps> = ({ slice }) => {
   const { headline, subtitle, section_title, body, media } = slice.primary;

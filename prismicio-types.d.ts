@@ -381,7 +381,6 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type ProjectPostDocumentDataSlicesSlice =
-  | ShowcaseSplitSlice
   | HeadlineCtaCenteredSlice
   | TestimonialWithAvatarSlice
   | ImageCarouselSlice
@@ -2229,91 +2228,6 @@ export type ServicesCarouselSlice = prismic.SharedSlice<
 >;
 
 /**
- * Primary content in *ShowcaseSplit → Default → Primary*
- */
-export interface ShowcaseSplitSliceDefaultPrimary {
-  /**
-   * Headline field in *ShowcaseSplit → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: showcase_split.default.primary.headline
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  headline: prismic.RichTextField;
-
-  /**
-   * Subtitle field in *ShowcaseSplit → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: showcase_split.default.primary.subtitle
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  subtitle: prismic.KeyTextField;
-
-  /**
-   * Section Title field in *ShowcaseSplit → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: showcase_split.default.primary.section_title
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  section_title: prismic.RichTextField;
-
-  /**
-   * Body field in *ShowcaseSplit → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: showcase_split.default.primary.body
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * Media field in *ShowcaseSplit → Default → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: showcase_split.default.primary.media
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  media: prismic.ImageField<never>;
-}
-
-/**
- * Default variation for ShowcaseSplit Slice
- *
- * - **API ID**: `default`
- * - **Description**: Headline, subtitle, body text and image arranged in a two-column layout.
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type ShowcaseSplitSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<ShowcaseSplitSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *ShowcaseSplit*
- */
-type ShowcaseSplitSliceVariation = ShowcaseSplitSliceDefault;
-
-/**
- * ShowcaseSplit Shared Slice
- *
- * - **API ID**: `showcase_split`
- * - **Description**: *None*
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type ShowcaseSplitSlice = prismic.SharedSlice<
-  "showcase_split",
-  ShowcaseSplitSliceVariation
->;
-
-/**
  * Primary content in *SplitContent → Default → Primary*
  */
 export interface SplitContentSliceDefaultPrimary {
@@ -2748,10 +2662,6 @@ declare module "@prismicio/client" {
       ServicesCarouselSliceDefaultPrimary,
       ServicesCarouselSliceVariation,
       ServicesCarouselSliceDefault,
-      ShowcaseSplitSlice,
-      ShowcaseSplitSliceDefaultPrimary,
-      ShowcaseSplitSliceVariation,
-      ShowcaseSplitSliceDefault,
       SplitContentSlice,
       SplitContentSliceDefaultPrimary,
       SplitContentSliceVariation,
