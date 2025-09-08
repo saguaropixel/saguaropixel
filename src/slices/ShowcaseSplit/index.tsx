@@ -1,4 +1,4 @@
-// src/slices/HeadlineRichtextImage/index.tsx
+// src/slices/ShowcaseSplit/index.tsx
 import { Content, isFilled } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import { PrismicRichText, SliceComponentProps } from '@prismicio/react';
@@ -7,10 +7,10 @@ import { FC } from 'react';
 // Remove the import (and the usage) if you don't use it.
 // import LaptopMock from "@/components/LaptopMock";
 
-export type HeadlineRichtextImageProps =
+export type ShowcaseSplitProps =
   SliceComponentProps<Content.ShowcaseSplitSlice>;
 
-const HeadlineRichtextImage: FC<HeadlineRichtextImageProps> = ({ slice }) => {
+const ShowcaseSplit: FC<ShowcaseSplitProps> = ({ slice }) => {
   const { headline, subtitle, section_title, body, media } = slice.primary;
 
   return (
@@ -116,4 +116,4 @@ const HeadlineRichtextImage: FC<HeadlineRichtextImageProps> = ({ slice }) => {
   );
 };
 
-export default HeadlineRichtextImage;
+export default ShowcaseSplit;

@@ -381,6 +381,7 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type ProjectPostDocumentDataSlicesSlice =
+  | ShowcaseSplitSlice
   | HeadlineCtaCenteredSlice
   | TestimonialWithAvatarSlice
   | ImageCarouselSlice
