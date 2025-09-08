@@ -1,0 +1,53 @@
+{
+  "type": "SharedSlice",
+  "id": "showcase_split",
+  "name": "ShowcaseSplit",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "description": "Headline, subtitle, body text and image arranged in a two-column layout.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "headline": {
+          "type": "StructuredText",
+          "config": {
+            "single": "heading1",
+            "label": "Headline"
+          }
+        },
+        "subtitle": {
+          "type": "Text",
+          "config": {
+            "label": "Subtitle"
+          }
+        },
+        "section_title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Section Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading2"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "paragraph,strong,em,hyperlink",
+            "label": "Body"
+          }
+        },
+        "media": {
+          "type": "Image",
+          "config": {
+            "label": "Media"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -381,11 +381,11 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type ProjectPostDocumentDataSlicesSlice =
+  | HeadlineCtaCenteredSlice
   | TestimonialWithAvatarSlice
   | ImageCarouselSlice
   | ProcessWithImageStepsSlice
   | ProjectSummaryShowcaseSlice
-  | MediaSplitContentSlice
   | HeroShowcaseSlice;
 
 /**
@@ -1681,109 +1681,6 @@ export type ImageCarouselSlice = prismic.SharedSlice<
 >;
 
 /**
- * Item in *MediaSplitContent → Text Left, Media Right → Primary → Content Group*
- */
-export interface MediaSplitContentSliceTextLeftMediaRightPrimaryContentGroupItem {
-  /**
-   * Section Heading field in *MediaSplitContent → Text Left, Media Right → Primary → Content Group*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: media_split_content.text_left_media_right.primary.content_group[].section_heading
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  section_heading: prismic.RichTextField;
-
-  /**
-   * Body field in *MediaSplitContent → Text Left, Media Right → Primary → Content Group*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: media_split_content.text_left_media_right.primary.content_group[].body
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  body: prismic.RichTextField;
-}
-
-/**
- * Primary content in *MediaSplitContent → Text Left, Media Right → Primary*
- */
-export interface MediaSplitContentSliceTextLeftMediaRightPrimary {
-  /**
-   * Heading field in *MediaSplitContent → Text Left, Media Right → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: media_split_content.text_left_media_right.primary.heading
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  heading: prismic.RichTextField;
-
-  /**
-   * Subheading field in *MediaSplitContent → Text Left, Media Right → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: media_split_content.text_left_media_right.primary.subheading
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  subheading: prismic.KeyTextField;
-
-  /**
-   * Content Group field in *MediaSplitContent → Text Left, Media Right → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: media_split_content.text_left_media_right.primary.content_group[]
-   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
-   */
-  content_group: prismic.GroupField<
-    Simplify<MediaSplitContentSliceTextLeftMediaRightPrimaryContentGroupItem>
-  >;
-
-  /**
-   * Media Image field in *MediaSplitContent → Text Left, Media Right → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: media_split_content.text_left_media_right.primary.media_image
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  media_image: prismic.ImageField<never>;
-}
-
-/**
- * Text Left, Media Right variation for MediaSplitContent Slice
- *
- * - **API ID**: `text_left_media_right`
- * - **Description**: Displays structured text (heading, subheading, body copy) on the left and a media element (such as an image) on the right in a side-by-side layout.
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type MediaSplitContentSliceTextLeftMediaRight =
-  prismic.SharedSliceVariation<
-    "text_left_media_right",
-    Simplify<MediaSplitContentSliceTextLeftMediaRightPrimary>,
-    never
-  >;
-
-/**
- * Slice variation for *MediaSplitContent*
- */
-type MediaSplitContentSliceVariation = MediaSplitContentSliceTextLeftMediaRight;
-
-/**
- * MediaSplitContent Shared Slice
- *
- * - **API ID**: `media_split_content`
- * - **Description**: *None*
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type MediaSplitContentSlice = prismic.SharedSlice<
-  "media_split_content",
-  MediaSplitContentSliceVariation
->;
-
-/**
  * Primary content in *People → Default → Primary*
  */
 export interface PeopleSliceDefaultPrimary {
@@ -1856,19 +1753,24 @@ type PeopleSliceVariation = PeopleSliceDefault;
 export type PeopleSlice = prismic.SharedSlice<"people", PeopleSliceVariation>;
 
 /**
- * Item in *ProcessWithImageSteps → Default → Primary → Steps*
+ * Item in *ProcessWithImageSteps → Default → Primary → Images*
  */
-export interface ProcessWithImageStepsSliceDefaultPrimaryStepsItem {
+export interface ProcessWithImageStepsSliceDefaultPrimaryImagesItem {
   /**
-   * Image field in *ProcessWithImageSteps → Default → Primary → Steps*
+   * Image field in *ProcessWithImageSteps → Default → Primary → Images*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: process_with_image_steps.default.primary.steps[].image
+   * - **API ID Path**: process_with_image_steps.default.primary.images[].image
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
   image: prismic.ImageField<never>;
+}
 
+/**
+ * Item in *ProcessWithImageSteps → Default → Primary → Steps*
+ */
+export interface ProcessWithImageStepsSliceDefaultPrimaryStepsItem {
   /**
    * Step Heading field in *ProcessWithImageSteps → Default → Primary → Steps*
    *
@@ -1895,24 +1797,48 @@ export interface ProcessWithImageStepsSliceDefaultPrimaryStepsItem {
  */
 export interface ProcessWithImageStepsSliceDefaultPrimary {
   /**
-   * Title field in *ProcessWithImageSteps → Default → Primary*
+   * Background Color field in *ProcessWithImageSteps → Default → Primary*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Content Relationship
    * - **Placeholder**: *None*
-   * - **API ID Path**: process_with_image_steps.default.primary.title
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   * - **API ID Path**: process_with_image_steps.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
    */
-  title: prismic.RichTextField;
+  background_color: ContentRelationshipFieldWithData<
+    [{ id: "brand_color"; fields: ["name", "value"] }]
+  >;
 
   /**
-   * Intro field in *ProcessWithImageSteps → Default → Primary*
+   * Heading field in *ProcessWithImageSteps → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: process_with_image_steps.default.primary.intro
+   * - **API ID Path**: process_with_image_steps.default.primary.heading
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
-  intro: prismic.RichTextField;
+  heading: prismic.RichTextField;
+
+  /**
+   * Sub Heading field in *ProcessWithImageSteps → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: process_with_image_steps.default.primary.sub_heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  sub_heading: prismic.RichTextField;
+
+  /**
+   * Images field in *ProcessWithImageSteps → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: process_with_image_steps.default.primary.images[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  images: prismic.GroupField<
+    Simplify<ProcessWithImageStepsSliceDefaultPrimaryImagesItem>
+  >;
 
   /**
    * Steps field in *ProcessWithImageSteps → Default → Primary*
@@ -2299,6 +2225,91 @@ type ServicesCarouselSliceVariation = ServicesCarouselSliceDefault;
 export type ServicesCarouselSlice = prismic.SharedSlice<
   "services_carousel",
   ServicesCarouselSliceVariation
+>;
+
+/**
+ * Primary content in *ShowcaseSplit → Default → Primary*
+ */
+export interface ShowcaseSplitSliceDefaultPrimary {
+  /**
+   * Headline field in *ShowcaseSplit → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: showcase_split.default.primary.headline
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  headline: prismic.RichTextField;
+
+  /**
+   * Subtitle field in *ShowcaseSplit → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: showcase_split.default.primary.subtitle
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  subtitle: prismic.KeyTextField;
+
+  /**
+   * Section Title field in *ShowcaseSplit → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: showcase_split.default.primary.section_title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  section_title: prismic.RichTextField;
+
+  /**
+   * Body field in *ShowcaseSplit → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: showcase_split.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Media field in *ShowcaseSplit → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: showcase_split.default.primary.media
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  media: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for ShowcaseSplit Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Headline, subtitle, body text and image arranged in a two-column layout.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ShowcaseSplitSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ShowcaseSplitSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ShowcaseSplit*
+ */
+type ShowcaseSplitSliceVariation = ShowcaseSplitSliceDefault;
+
+/**
+ * ShowcaseSplit Shared Slice
+ *
+ * - **API ID**: `showcase_split`
+ * - **Description**: *None*
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ShowcaseSplitSlice = prismic.SharedSlice<
+  "showcase_split",
+  ShowcaseSplitSliceVariation
 >;
 
 /**
@@ -2711,16 +2722,12 @@ declare module "@prismicio/client" {
       ImageCarouselSliceDefaultPrimary,
       ImageCarouselSliceVariation,
       ImageCarouselSliceDefault,
-      MediaSplitContentSlice,
-      MediaSplitContentSliceTextLeftMediaRightPrimaryContentGroupItem,
-      MediaSplitContentSliceTextLeftMediaRightPrimary,
-      MediaSplitContentSliceVariation,
-      MediaSplitContentSliceTextLeftMediaRight,
       PeopleSlice,
       PeopleSliceDefaultPrimary,
       PeopleSliceVariation,
       PeopleSliceDefault,
       ProcessWithImageStepsSlice,
+      ProcessWithImageStepsSliceDefaultPrimaryImagesItem,
       ProcessWithImageStepsSliceDefaultPrimaryStepsItem,
       ProcessWithImageStepsSliceDefaultPrimary,
       ProcessWithImageStepsSliceVariation,
@@ -2740,6 +2747,10 @@ declare module "@prismicio/client" {
       ServicesCarouselSliceDefaultPrimary,
       ServicesCarouselSliceVariation,
       ServicesCarouselSliceDefault,
+      ShowcaseSplitSlice,
+      ShowcaseSplitSliceDefaultPrimary,
+      ShowcaseSplitSliceVariation,
+      ShowcaseSplitSliceDefault,
       SplitContentSlice,
       SplitContentSliceDefaultPrimary,
       SplitContentSliceVariation,

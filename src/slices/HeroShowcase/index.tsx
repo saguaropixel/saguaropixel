@@ -1,58 +1,71 @@
-import { Content } from '@prismicio/client';
+// src/slices/HeroShowcase/index.tsx
+import LaptopMock from '@/components/LaptopMock'; // adjust path if needed
+import { Content, isFilled } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import { PrismicRichText, SliceComponentProps } from '@prismicio/react';
 import { FC } from 'react';
 
-/**
- * Props for `HeroShowcase`.
- */
 export type HeroShowcaseProps = SliceComponentProps<Content.HeroShowcaseSlice>;
 
-/**
- * Component for "HeroShowcase" Slices.
- */
 const HeroShowcase: FC<HeroShowcaseProps> = ({ slice }) => {
+  const tech = slice.primary.tech_stack ?? [];
+
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="bg-[--hero-bg,#EEF3F6] py-16 md:py-24"
     >
-      Placeholder component for hero_showcase (variation: {slice.variation})
-      slices.
-      <br />
-      <strong>You can edit this slice directly in your code editor.</strong>
-      <PrismicRichText field={slice.primary.title} />
-      <PrismicRichText field={slice.primary.subtitle} />
-      {slice.primary.tech_stack.map((item, i) => (
-        <PrismicNextImage key={i} field={item.logo} />
-      ))}
-      <PrismicNextImage field={slice.primary.device_mockup} />
-      {/**
-       * 💡 Use Prismic MCP with your code editor
-       *
-       * Get AI-powered help to build your slice components — based on your actual model.
-       *
-       * ▶️ Setup:
-       * 1. Add a new MCP Server in your code editor:
-       *
-       * {
-       *   "mcpServers": {
-       *     "Prismic MCP": {
-       *       "command": "npx",
-       *       "args": ["-y", "@prismicio/mcp-server@latest"]
-       *     }
-       *   }
-       * }
-       *
-       * 2. Select a model optimized for coding (e.g. Claude 3.7 Sonnet or similar)
-       *
-       * ✅ Then open your slice file and ask your code editor:
-       *    "Code this slice"
-       *
-       * Your code editor reads your slice model and helps you code faster ⚡
-       * 🎙️ Give your feedback: https://community.prismic.io/t/help-us-shape-the-future-of-slice-creation/19505
-       * 📚 Documentation: https://prismic.io/docs/ai#code-with-prismics-mcp-server
-       */}
+      <div className="mx-auto w-full max-w-6xl px-4 text-center">
+        {/* Title */}
+        <div className="mx-auto max-w-4xl">
+          <PrismicRichText
+            field={slice.primary.title}
+            components={{
+              heading1: ({ children }) => (
+                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none text-neutral-900">
+                  {children}
+                </h1>
+              ),
+            }}
+          />
+        </div>
+
+        {/* Subtitle */}
+        <div className="mx-auto mt-3 max-w-3xl text-balance">
+          <PrismicRichText
+            field={slice.primary.subtitle}
+            components={{
+              paragraph: ({ children }) => (
+                <p className="text-base md:text-lg text-neutral-600">
+                  {children}
+                </p>
+              ),
+            }}
+          />
+        </div>
+
+        {/* Tech stack logos */}
+        {tech.length > 0 && (
+          <div className="mx-auto mt-5 flex w-full max-w-xl items-center justify-center gap-6 opacity-90">
+            {tech.map((item, i) => (
+              <div key={i} className="h-5 w-auto shrink-0 grayscale">
+                <PrismicNextImage
+                  field={item.logo}
+                  className="h-5 w-auto object-contain"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Device mockup via LaptopMock */}
+        <div className="mx-auto mt-10 w-full max-w-5xl">
+          {isFilled.image(slice.primary.device_mockup) && (
+            <LaptopMock img={slice.primary.device_mockup} />
+          )}
+        </div>
+      </div>
     </section>
   );
 };

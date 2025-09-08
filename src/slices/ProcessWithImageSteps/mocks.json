@@ -3,58 +3,12 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
 		"primary": {
-			"title": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "heading1",
-						"content": {
-							"text": "Kitchen"
-						}
-					}
-				]
-			},
-			"intro": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Voluptate occaecat aute laboris et nostrud cupidatat in esse sit sit adipisicing qui. Ut proident laborum magna non labore ea elit esse consectetur est. Irure ea eiusmod amet."
-						}
-					}
-				]
-			},
 			"steps": {
 				"__TYPE__": "GroupContentType",
 				"value": [
 					{
 						"__TYPE__": "GroupItemContent",
 						"value": [
-							[
-								"image",
-								{
-									"__TYPE__": "ImageContent",
-									"origin": {
-										"id": "main",
-										"url": "https://images.unsplash.com/photo-1515378960530-7c0da6231fb1",
-										"width": 5616,
-										"height": 3744
-									},
-									"url": "https://images.unsplash.com/photo-1515378960530-7c0da6231fb1",
-									"width": 5616,
-									"height": 3744,
-									"edit": {
-										"zoom": 1,
-										"crop": {
-											"x": 0,
-											"y": 0
-										},
-										"background": "transparent"
-									},
-									"alt": "church"
-								}
-							],
 							[
 								"heading",
 								{
@@ -86,6 +40,72 @@
 						]
 					}
 				]
+			},
+			"images": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1589321578146-4c1ba445cc88",
+										"width": 3168,
+										"height": 4752
+									},
+									"url": "https://images.unsplash.com/photo-1589321578146-4c1ba445cc88",
+									"width": 3168,
+									"height": 4752,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"alt": "palace",
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							]
+						]
+					}
+				]
+			},
+			"sub_heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Non Lorem id cillum. Sint anim est officia occaecat do officia incididunt ad aliquip ipsum voluptate officia eiusmod. Aute officia fugiat velit proident eiusmod fugiat culpa in consequat sit minim voluptate magna excepteur."
+						}
+					}
+				]
+			},
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "Remove"
+						}
+					}
+				]
+			},
+			"background_color": {
+				"key": "a2d66cc1-fa91-4b38-a865-8293f7ed1300",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
 			}
 		},
 		"items": []

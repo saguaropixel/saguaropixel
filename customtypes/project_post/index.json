@@ -56,6 +56,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "headline_cta_centered": {
+              "type": "SharedSlice"
+            },
             "testimonial_with_avatar": {
               "type": "SharedSlice"
             },
@@ -66,9 +69,6 @@
               "type": "SharedSlice"
             },
             "project_summary_showcase": {
-              "type": "SharedSlice"
-            },
-            "media_split_content": {
               "type": "SharedSlice"
             },
             "hero_showcase": {
