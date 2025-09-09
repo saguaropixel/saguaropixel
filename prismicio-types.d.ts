@@ -381,6 +381,7 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type ProjectPostDocumentDataSlicesSlice =
+  | ShowCaseSplitSlice
   | HeadlineCtaCenteredSlice
   | TestimonialWithAvatarSlice
   | ImageCarouselSlice
@@ -2228,6 +2229,91 @@ export type ServicesCarouselSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *ShowCaseSplit → Default → Primary*
+ */
+export interface ShowCaseSplitSliceDefaultPrimary {
+  /**
+   * Headline field in *ShowCaseSplit → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: show_case_split.default.primary.headline
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  headline: prismic.RichTextField;
+
+  /**
+   * Subtitle field in *ShowCaseSplit → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: show_case_split.default.primary.subtitle
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  subtitle: prismic.KeyTextField;
+
+  /**
+   * Section Title field in *ShowCaseSplit → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: show_case_split.default.primary.section_title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  section_title: prismic.RichTextField;
+
+  /**
+   * Body field in *ShowCaseSplit → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: show_case_split.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Media field in *ShowCaseSplit → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: show_case_split.default.primary.media
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  media: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for ShowCaseSplit Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ShowCaseSplitSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ShowCaseSplitSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ShowCaseSplit*
+ */
+type ShowCaseSplitSliceVariation = ShowCaseSplitSliceDefault;
+
+/**
+ * ShowCaseSplit Shared Slice
+ *
+ * - **API ID**: `show_case_split`
+ * - **Description**: ShowCaseSplit
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ShowCaseSplitSlice = prismic.SharedSlice<
+  "show_case_split",
+  ShowCaseSplitSliceVariation
+>;
+
+/**
  * Primary content in *SplitContent → Default → Primary*
  */
 export interface SplitContentSliceDefaultPrimary {
@@ -2662,6 +2748,10 @@ declare module "@prismicio/client" {
       ServicesCarouselSliceDefaultPrimary,
       ServicesCarouselSliceVariation,
       ServicesCarouselSliceDefault,
+      ShowCaseSplitSlice,
+      ShowCaseSplitSliceDefaultPrimary,
+      ShowCaseSplitSliceVariation,
+      ShowCaseSplitSliceDefault,
       SplitContentSlice,
       SplitContentSliceDefaultPrimary,
       SplitContentSliceVariation,

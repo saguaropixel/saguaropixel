@@ -1,27 +1,31 @@
 {
+  "id": "show_case_split",
   "type": "SharedSlice",
-  "id": "showcase_split",
-  "name": "ShowcaseSplit",
+  "name": "ShowCaseSplit",
+  "description": "ShowCaseSplit",
   "variations": [
     {
       "id": "default",
       "name": "Default",
-      "description": "Headline, subtitle, body text and image arranged in a two-column layout.",
-      "version": "initial",
-      "imageUrl": "",
       "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
       "primary": {
         "headline": {
           "type": "StructuredText",
           "config": {
-            "single": "heading1",
-            "label": "Headline"
+            "label": "Headline",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading1"
           }
         },
         "subtitle": {
           "type": "Text",
           "config": {
-            "label": "Subtitle"
+            "label": "Subtitle",
+            "placeholder": ""
           }
         },
         "section_title": {
@@ -30,20 +34,24 @@
             "label": "Section Title",
             "placeholder": "",
             "allowTargetBlank": true,
-            "single": "heading2"
+            "multi": "heading2"
           }
         },
         "body": {
           "type": "StructuredText",
           "config": {
-            "multi": "paragraph,strong,em,hyperlink",
-            "label": "Body"
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,strong,em,hyperlink,list-item,o-list-item"
           }
         },
         "media": {
           "type": "Image",
           "config": {
-            "label": "Media"
+            "label": "Media",
+            "constraint": {},
+            "thumbnails": []
           }
         }
       },

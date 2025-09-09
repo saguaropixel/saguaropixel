@@ -3,14 +3,11 @@ import { Content, isFilled } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import { PrismicRichText, SliceComponentProps } from '@prismicio/react';
 import { FC } from 'react';
-// Optional: if you already have this component in your project.
-// Remove the import (and the usage) if you don't use it.
-// import LaptopMock from "@/components/LaptopMock";
 
-export type ShowcaseSplitProps =
-  SliceComponentProps<Content.ShowcaseSplitSlice>;
+export type ShowCaseSplitProps =
+  SliceComponentProps<Content.ShowCaseSplitSlice>;
 
-const ShowcaseSplit: FC<ShowcaseSplitProps> = ({ slice }) => {
+const ShowCaseSplit: FC<ShowCaseSplitProps> = ({ slice }) => {
   const { headline, subtitle, section_title, body, media } = slice.primary;
 
   return (
@@ -116,4 +113,4 @@ const ShowcaseSplit: FC<ShowcaseSplitProps> = ({ slice }) => {
   );
 };
 
-export default ShowcaseSplit;
+export default ShowCaseSplit;
