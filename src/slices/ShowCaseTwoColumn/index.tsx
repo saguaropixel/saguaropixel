@@ -1,13 +1,18 @@
-// src/slices/ShowcaseSplit/index.tsx
 import { Content, isFilled } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import { PrismicRichText, SliceComponentProps } from '@prismicio/react';
 import { FC } from 'react';
 
-export type ShowCaseSplitProps =
-  SliceComponentProps<Content.ShowCaseSplitSlice>;
+/**
+ * Props for `ShowCaseTwoColumn`.
+ */
+export type ShowCaseTwoColumnProps =
+  SliceComponentProps<Content.ShowCaseTwoColumnSlice>;
 
-const ShowCaseSplit: FC<ShowCaseSplitProps> = ({ slice }) => {
+/**
+ * Component for "ShowCaseTwoColumn" Slices.
+ */
+const ShowCaseTwoColumn: FC<ShowCaseTwoColumnProps> = ({ slice }) => {
   const { headline, subtitle, section_title, body, media } = slice.primary;
 
   return (
@@ -113,4 +118,4 @@ const ShowCaseSplit: FC<ShowCaseSplitProps> = ({ slice }) => {
   );
 };
 
-export default ShowCaseSplit;
+export default ShowCaseTwoColumn;

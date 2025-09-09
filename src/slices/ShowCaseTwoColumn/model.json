@@ -1,8 +1,8 @@
 {
-  "id": "show_case_split",
+  "id": "show_case_two_column",
   "type": "SharedSlice",
-  "name": "ShowCaseSplit",
-  "description": "ShowCaseSplit",
+  "name": "ShowCaseTwoColumn",
+  "description": "ShowCaseTwoColumn",
   "variations": [
     {
       "id": "default",
@@ -43,7 +43,7 @@
             "label": "Body",
             "placeholder": "",
             "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,strong,em,hyperlink,list-item,o-list-item"
+            "multi": "paragraph,preformatted,hyperlink,embed,list-item,o-list-item,strong,em"
           }
         },
         "media": {

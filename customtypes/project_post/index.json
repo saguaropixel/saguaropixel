@@ -56,7 +56,7 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "show_case_split": {
+            "show_case_two_column": {
               "type": "SharedSlice"
             },
             "headline_cta_centered": {
