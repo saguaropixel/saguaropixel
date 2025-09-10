@@ -1914,16 +1914,6 @@ export interface ProjectSummaryShowcaseSliceDefaultWithFeaturesImagePrimaryFeatu
  */
 export interface ProjectSummaryShowcaseSliceDefaultWithFeaturesImagePrimary {
   /**
-   * Eyebrow field in *ProjectSummaryShowcase → Default with Features & Image → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project_summary_showcase.default_with_features_image.primary.eyebrow
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  eyebrow: prismic.RichTextField;
-
-  /**
    * Main Title field in *ProjectSummaryShowcase → Default with Features & Image → Primary*
    *
    * - **Field Type**: Rich Text

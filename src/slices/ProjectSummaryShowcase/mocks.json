@@ -3,17 +3,6 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default_with_features_image",
 		"primary": {
-			"eyebrow": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "heading3",
-						"content": {
-							"text": "Telephone"
-						}
-					}
-				]
-			},
 			"main_title": {
 				"__TYPE__": "StructuredTextContent",
 				"value": [
@@ -40,9 +29,9 @@
 				"__TYPE__": "StructuredTextContent",
 				"value": [
 					{
-						"type": "heading2",
+						"type": "heading3",
 						"content": {
-							"text": "Field"
+							"text": "Class"
 						}
 					}
 				]
@@ -59,8 +48,8 @@
 				]
 			},
 			"primary_button": {
-				"__TYPE__": "LinkContent",
 				"key": "c464d39b-ebc6-46c0-9795-749bbe977e62",
+				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "ExternalLink",
 					"url": "https://slicemachine.dev",
@@ -76,7 +65,6 @@
 							[
 								"icon",
 								{
-									"__TYPE__": "ImageContent",
 									"origin": {
 										"id": "main",
 										"url": "https://images.unsplash.com/photo-1560457079-9a6532ccb118",
@@ -94,7 +82,9 @@
 										},
 										"background": "transparent"
 									},
-									"alt": "solid"
+									"alt": "solid",
+									"credits": null,
+									"__TYPE__": "ImageContent"
 								}
 							],
 							[
@@ -110,7 +100,6 @@
 				]
 			},
 			"preview_image": {
-				"__TYPE__": "ImageContent",
 				"origin": {
 					"id": "main",
 					"url": "https://images.unsplash.com/photo-1600804931749-2da4ce26c869",
@@ -128,7 +117,9 @@
 					},
 					"background": "transparent"
 				},
-				"alt": "swam"
+				"alt": "swam",
+				"credits": null,
+				"__TYPE__": "ImageContent"
 			}
 		},
 		"items": []

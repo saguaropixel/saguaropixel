@@ -11,13 +11,6 @@
       "imageUrl": "",
       "docURL": "...",
       "primary": {
-        "eyebrow": {
-          "type": "StructuredText",
-          "config": {
-            "single": "heading3",
-            "label": "Eyebrow"
-          }
-        },
         "main_title": {
           "type": "StructuredText",
           "config": {
@@ -35,8 +28,10 @@
         "summary_title": {
           "type": "StructuredText",
           "config": {
-            "single": "heading2",
-            "label": "Summary Title"
+            "label": "Summary Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading3"
           }
         },
         "summary_text": {
@@ -81,7 +76,8 @@
             "label": "Preview Image"
           }
         }
-      }
+      },
+      "items": {}
     }
   ]
 }
