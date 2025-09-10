@@ -27,9 +27,9 @@ export default {
        */
       // Fonts from next/font variables
       fontFamily: {
-        heading: ['var(--font-tiny5)'],
+        heading: ['var(--font-jersey)'], // var(--font-tiny5)
         sans: ['var(--font-nunito-sans)'],
-        tiny5: ['var(--font-tiny5)'],
+        tiny5: ['var(--font-jersey)'],
         nunito: ['var(--font-nunito-sans)'],
       },
       // Shadows from tokens

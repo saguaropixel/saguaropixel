@@ -1,13 +1,19 @@
 import Footer from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { createClient } from '@/prismicio';
-import { Nunito_Sans, Tiny5 } from 'next/font/google';
+import { Jersey_25, Nunito_Sans, Tiny5 } from 'next/font/google';
 import './globals.css';
 
 const tiny5 = Tiny5({
   weight: '400', // Tiny5 is display-only, has single weight
   subsets: ['latin'],
   variable: '--font-tiny5',
+});
+
+const jersey = Jersey_25({
+  weight: '400', // Tiny5 is display-only, has single weight
+  subsets: ['latin'],
+  variable: '--font-jersey',
 });
 
 const nunitoSans = Nunito_Sans({
@@ -28,7 +34,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body
-        className={`${tiny5.variable} ${nunitoSans.variable} antialiased font-nunito font-medium text-zinc-800`}
+        className={`${jersey.variable} ${nunitoSans.variable} antialiased font-nunito font-medium text-zinc-800`}
       >
         <main>
           <Header />
