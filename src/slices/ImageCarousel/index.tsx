@@ -66,16 +66,12 @@ const ImageCarousel: FC<ImageCarouselProps> = ({ slice }) => {
                 className="
                   absolute z-10 top-1/2 -translate-y-1/2
                   left-4 md:-left-4
-                  h-10 w-10 rounded-full border-2 border-pink-500 text-pink-500
-                  bg-white/90 hover:bg-white shadow-md backdrop-blur
                 "
               />
               <CarouselNext
                 className="
                   absolute z-10 top-1/2 -translate-y-1/2
                   right-2 md:-right-4
-                  h-10 w-10 rounded-full border-2 border-pink-500 text-pink-500
-                  bg-white/90 hover:bg-white shadow-md backdrop-blur
                 "
               />
             </>
