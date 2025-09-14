@@ -1,7 +1,7 @@
 import Footer from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { createClient } from '@/prismicio';
-import { Jersey_25, Nunito_Sans, Tiny5 } from 'next/font/google';
+import { Jersey_10, Nunito_Sans, Tiny5 } from 'next/font/google';
 import './globals.css';
 
 const tiny5 = Tiny5({
@@ -10,7 +10,7 @@ const tiny5 = Tiny5({
   variable: '--font-tiny5',
 });
 
-const jersey = Jersey_25({
+const jersey = Jersey_10({
   weight: '400', // Tiny5 is display-only, has single weight
   subsets: ['latin'],
   variable: '--font-jersey',
