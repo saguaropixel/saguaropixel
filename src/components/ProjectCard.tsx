@@ -37,7 +37,7 @@ export function ProjectCard({ doc }: { doc: any }) {
 
         <div className="mt-4 flex items-center justify-between">
           <Button variant="solid" asChild tone={'magenta'}>
-            <Link href="/contact">Start a project</Link>
+            <Link href={doc?.url}>Start a project</Link>
           </Button>
           {/* {doc?.data?.featured && <Badge>Featured</Badge>} */}
         </div>

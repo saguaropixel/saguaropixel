@@ -5,12 +5,12 @@
       "value": {
         "fontSize": 96,
         "textDecoration": "none",
-        "fontFamily": "Jersey_25",
+        "fontFamily": "Jersey 10",
         "fontWeight": 400,
         "fontStyle": "normal",
         "fontStretch": "normal",
         "letterSpacing": -0.96,
-        "lineHeight": 96,
+        "lineHeight": 86,
         "paragraphIndent": 0,
         "paragraphSpacing": 48,
         "textCase": "none"
@@ -27,7 +27,7 @@
       "value": {
         "fontSize": 64,
         "textDecoration": "none",
-        "fontFamily": "Jersey 25",
+        "fontFamily": "Jersey 10",
         "fontWeight": 400,
         "fontStyle": "normal",
         "fontStretch": "normal",
@@ -49,7 +49,7 @@
       "value": {
         "fontSize": 60,
         "textDecoration": "none",
-        "fontFamily": "Jersey_25",
+        "fontFamily": "Jersey 10",
         "fontWeight": 400,
         "fontStyle": "normal",
         "fontStretch": "normal",
@@ -71,7 +71,7 @@
       "value": {
         "fontSize": 48,
         "textDecoration": "none",
-        "fontFamily": "Jersey 25",
+        "fontFamily": "Jersey 10",
         "fontWeight": 400,
         "fontStyle": "normal",
         "fontStretch": "normal",
@@ -93,11 +93,11 @@
       "value": {
         "fontSize": 38,
         "textDecoration": "none",
-        "fontFamily": "Jersey 25",
+        "fontFamily": "Jersey 10",
         "fontWeight": 400,
         "fontStyle": "normal",
         "fontStretch": "normal",
-        "letterSpacing": -0.76,
+        "letterSpacing": -0.38,
         "lineHeight": 38,
         "paragraphIndent": 0,
         "paragraphSpacing": 24,
@@ -115,11 +115,11 @@
       "value": {
         "fontSize": 28,
         "textDecoration": "none",
-        "fontFamily": "Jersey 25",
+        "fontFamily": "Jersey 10",
         "fontWeight": 400,
         "fontStyle": "normal",
         "fontStretch": "normal",
-        "letterSpacing": -0.56,
+        "letterSpacing": -0.28,
         "lineHeight": 28,
         "paragraphIndent": 0,
         "paragraphSpacing": 20,
@@ -157,14 +157,14 @@
     "button text": {
       "type": "custom-fontStyle",
       "value": {
-        "fontSize": 15,
+        "fontSize": 20,
         "textDecoration": "none",
-        "fontFamily": "Jersey 25",
+        "fontFamily": "Jersey 10",
         "fontWeight": 400,
         "fontStyle": "normal",
         "fontStretch": "normal",
-        "letterSpacing": 0,
-        "lineHeight": 15,
+        "letterSpacing": 0.4,
+        "lineHeight": 10,
         "paragraphIndent": 0,
         "paragraphSpacing": 16,
         "textCase": "uppercase"
@@ -181,15 +181,15 @@
       "value": {
         "fontSize": 142,
         "textDecoration": "none",
-        "fontFamily": "Jersey 25",
+        "fontFamily": "Jersey 10",
         "fontWeight": 400,
         "fontStyle": "normal",
         "fontStretch": "normal",
-        "letterSpacing": 0,
-        "lineHeight": 142,
+        "letterSpacing": -1.42,
+        "lineHeight": 112,
         "paragraphIndent": 0,
         "paragraphSpacing": 16,
-        "textCase": "uppercase"
+        "textCase": "none"
       },
       "extensions": {
         "org.lukasoppermann.figmaDesignTokens": {
@@ -203,15 +203,15 @@
       "value": {
         "fontSize": 116,
         "textDecoration": "none",
-        "fontFamily": "Jersey 25",
+        "fontFamily": "Jersey 10",
         "fontWeight": 400,
         "fontStyle": "normal",
         "fontStretch": "normal",
-        "letterSpacing": 0,
-        "lineHeight": 116,
+        "letterSpacing": -1.16,
+        "lineHeight": 96,
         "paragraphIndent": 0,
         "paragraphSpacing": 16,
-        "textCase": "uppercase"
+        "textCase": "none"
       },
       "extensions": {
         "org.lukasoppermann.figmaDesignTokens": {
@@ -823,7 +823,7 @@
       },
       "200": {
         "type": "color",
-        "value": "#a1eaf3ff",
+        "value": "#d2f6faff",
         "blendMode": "normal",
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
@@ -952,7 +952,7 @@
         }
       }
     },
-    "green": {
+    "cactus-green": {
       "100": {
         "type": "color",
         "value": "#d6fbf7ff",
@@ -1071,7 +1071,7 @@
         }
       }
     },
-    "yellow": {
+    "sunset-yellow": {
       "100": {
         "type": "color",
         "value": "#fff4ccff",
@@ -1560,7 +1560,7 @@
       },
       "fontFamily": {
         "type": "string",
-        "value": "Jersey 25"
+        "value": "Jersey 10"
       },
       "fontWeight": {
         "type": "number",
@@ -1580,7 +1580,7 @@
       },
       "lineHeight": {
         "type": "dimension",
-        "value": 96
+        "value": 86
       },
       "paragraphIndent": {
         "type": "dimension",
@@ -1606,7 +1606,7 @@
       },
       "fontFamily": {
         "type": "string",
-        "value": "Jersey 25"
+        "value": "Jersey 10"
       },
       "fontWeight": {
         "type": "number",
@@ -1652,7 +1652,7 @@
       },
       "fontFamily": {
         "type": "string",
-        "value": "Jersey 25"
+        "value": "Jersey 10"
       },
       "fontWeight": {
         "type": "number",
@@ -1698,7 +1698,7 @@
       },
       "fontFamily": {
         "type": "string",
-        "value": "Jersey 25"
+        "value": "Jersey 10"
       },
       "fontWeight": {
         "type": "number",
@@ -1744,7 +1744,7 @@
       },
       "fontFamily": {
         "type": "string",
-        "value": "Jersey 25"
+        "value": "Jersey 10"
       },
       "fontWeight": {
         "type": "number",
@@ -1760,7 +1760,7 @@
       },
       "letterSpacing": {
         "type": "dimension",
-        "value": -0.76
+        "value": -0.38
       },
       "lineHeight": {
         "type": "dimension",
@@ -1790,7 +1790,7 @@
       },
       "fontFamily": {
         "type": "string",
-        "value": "Jersey 25"
+        "value": "Jersey 10"
       },
       "fontWeight": {
         "type": "number",
@@ -1806,7 +1806,7 @@
       },
       "letterSpacing": {
         "type": "dimension",
-        "value": -0.56
+        "value": -0.28
       },
       "lineHeight": {
         "type": "dimension",
@@ -1874,7 +1874,7 @@
     "button text": {
       "fontSize": {
         "type": "dimension",
-        "value": 15
+        "value": 20
       },
       "textDecoration": {
         "type": "string",
@@ -1882,7 +1882,7 @@
       },
       "fontFamily": {
         "type": "string",
-        "value": "Jersey 25"
+        "value": "Jersey 10"
       },
       "fontWeight": {
         "type": "number",
@@ -1898,11 +1898,11 @@
       },
       "letterSpacing": {
         "type": "dimension",
-        "value": 0
+        "value": 0.4
       },
       "lineHeight": {
         "type": "dimension",
-        "value": 15
+        "value": 10
       },
       "paragraphIndent": {
         "type": "dimension",
@@ -1928,7 +1928,7 @@
       },
       "fontFamily": {
         "type": "string",
-        "value": "Jersey 25"
+        "value": "Jersey 10"
       },
       "fontWeight": {
         "type": "number",
@@ -1944,11 +1944,11 @@
       },
       "letterSpacing": {
         "type": "dimension",
-        "value": 0
+        "value": -1.42
       },
       "lineHeight": {
         "type": "dimension",
-        "value": 142
+        "value": 112
       },
       "paragraphIndent": {
         "type": "dimension",
@@ -1960,7 +1960,7 @@
       },
       "textCase": {
         "type": "string",
-        "value": "uppercase"
+        "value": "none"
       }
     },
     "huge heading 2": {
@@ -1974,7 +1974,7 @@
       },
       "fontFamily": {
         "type": "string",
-        "value": "Jersey 25"
+        "value": "Jersey 10"
       },
       "fontWeight": {
         "type": "number",
@@ -1990,11 +1990,11 @@
       },
       "letterSpacing": {
         "type": "dimension",
-        "value": 0
+        "value": -1.16
       },
       "lineHeight": {
         "type": "dimension",
-        "value": 116
+        "value": 96
       },
       "paragraphIndent": {
         "type": "dimension",
@@ -2006,7 +2006,7 @@
       },
       "textCase": {
         "type": "string",
-        "value": "uppercase"
+        "value": "none"
       }
     },
     "sub heading 40": {
